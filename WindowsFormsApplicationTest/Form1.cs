@@ -135,6 +135,7 @@ namespace WindowsFormsApplicationTest {
         public void showPending() {
             this.label_pending.Visible=true;
             this.treeView1.Visible=false;
+            
         }
         public void hidePending() {
             this.label_pending.Visible=false;
@@ -153,16 +154,21 @@ namespace WindowsFormsApplicationTest {
         //----------------------------------------------------
         //end of definition
         //==========================================================================================
-        public Form1() {
-            labelText="defaultForm1";
-            InitializeComponent();
-
-            //load the xml file and add nodes to the tree view
+        //setup fuction
+        public void setup() {
+            this.label_pending.Visible=false;
             StreamReader sr = new StreamReader(path,true);
             XDocument xdoc = XDocument.Load(sr);
             fileName=getFileName(path);
             firstNode=this.treeView1.Nodes.Add(fileName);
             addTreeNode(firstNode,(XElement)xdoc.FirstNode);
+        }
+        public Form1() {
+            labelText="defaultForm1";
+            InitializeComponent();
+            setup();
+            //load the xml file and add nodes to the tree view
+            
 
 
         }
@@ -278,5 +284,6 @@ namespace WindowsFormsApplicationTest {
         private void label_pending_Click(object sender,EventArgs e) {
 
         }
+        //123test
     }
 }

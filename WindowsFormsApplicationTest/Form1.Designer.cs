@@ -179,7 +179,7 @@ namespace WindowsFormsApplicationTest {
             this.button_expand.Name = "button_expand";
             this.button_expand.Size = new System.Drawing.Size(144, 23);
             this.button_expand.TabIndex = 11;
-            this.button_expand.Text = "button_expand";
+            this.button_expand.Text = "Expend Node";
             this.button_expand.UseVisualStyleBackColor = true;
             this.button_expand.Click += new System.EventHandler(this.button_expand_Click);
             // 
@@ -188,7 +188,7 @@ namespace WindowsFormsApplicationTest {
             this.label_itemFound.AutoSize = true;
             this.label_itemFound.BackColor = System.Drawing.Color.White;
             this.label_itemFound.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label_itemFound.Location = new System.Drawing.Point(148, 39);
+            this.label_itemFound.Location = new System.Drawing.Point(145, 38);
             this.label_itemFound.Name = "label_itemFound";
             this.label_itemFound.Size = new System.Drawing.Size(11, 12);
             this.label_itemFound.TabIndex = 12;
@@ -207,6 +207,7 @@ namespace WindowsFormsApplicationTest {
             // label_pending
             // 
             this.label_pending.AutoSize = true;
+            this.label_pending.BackColor = System.Drawing.Color.Transparent;
             this.label_pending.Font = new System.Drawing.Font("SimSun", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_pending.Location = new System.Drawing.Point(85, 266);
             this.label_pending.Name = "label_pending";
@@ -214,7 +215,6 @@ namespace WindowsFormsApplicationTest {
             this.label_pending.Size = new System.Drawing.Size(163, 29);
             this.label_pending.TabIndex = 15;
             this.label_pending.Text = "Pending...";
-            this.label_pending.Visible = false;
             this.label_pending.Click += new System.EventHandler(this.label_pending_Click);
             // 
             // Form1
