@@ -207,14 +207,16 @@ namespace WindowsFormsApplicationTest {
             // label_pending
             // 
             this.label_pending.AutoSize = true;
-            this.label_pending.BackColor = System.Drawing.Color.Transparent;
-            this.label_pending.Font = new System.Drawing.Font("SimSun", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_pending.Location = new System.Drawing.Point(85, 266);
+            this.label_pending.BackColor = System.Drawing.Color.White;
+            this.label_pending.Font = new System.Drawing.Font("Segoe UI Symbol", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_pending.ForeColor = System.Drawing.Color.Black;
+            this.label_pending.Location = new System.Drawing.Point(87, 266);
             this.label_pending.Name = "label_pending";
             this.label_pending.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label_pending.Size = new System.Drawing.Size(163, 29);
+            this.label_pending.Size = new System.Drawing.Size(139, 40);
             this.label_pending.TabIndex = 15;
             this.label_pending.Text = "Pending...";
+            this.label_pending.Visible = false;
             this.label_pending.Click += new System.EventHandler(this.label_pending_Click);
             // 
             // Form1

@@ -133,12 +133,14 @@ namespace WindowsFormsApplicationTest {
             }
         }
         public void showPending() {
-            this.label_pending.Visible=true;
+            this.label_pending.Show();
             this.treeView1.Visible=false;
-            
+            this.Update();
+
+
         }
         public void hidePending() {
-            this.label_pending.Visible=false;
+            this.label_pending.Hide();
             this.treeView1.Visible=true;
         }
 
@@ -156,7 +158,8 @@ namespace WindowsFormsApplicationTest {
         //==========================================================================================
         //setup fuction
         public void setup() {
-            this.label_pending.Visible=false;
+            //this.label_pending.Hide();
+            
             StreamReader sr = new StreamReader(path,true);
             XDocument xdoc = XDocument.Load(sr);
             fileName=getFileName(path);
