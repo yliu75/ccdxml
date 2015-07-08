@@ -296,6 +296,17 @@ namespace WindowsFormsApplicationTest {
                 setup(fileStream);
             }
         }
-        //123test
+
+        private void expendAllNodesToolStripMenuItem_Click(object sender,EventArgs e) {
+            if(firstNode.IsExpanded) {
+                firstNode.Collapse(false);
+                button_expandAll.Text="Expand All Node";
+            } else {
+                showPending();
+                firstNode.ExpandAll();
+                hidePending();
+                button_expandAll.Text="Collapse All Node";
+            }
+        }
     }
 }

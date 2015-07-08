@@ -84,6 +84,11 @@ namespace WindowsFormsApplicationTest {
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutAthenaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expendAllNodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,7 +105,7 @@ namespace WindowsFormsApplicationTest {
             this.label_title.AccessibleName = "label";
             this.label_title.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
             this.label_title.AutoSize = true;
-            this.label_title.BackColor = System.Drawing.SystemColors.Control;
+            this.label_title.BackColor = System.Drawing.Color.Transparent;
             this.label_title.Font = new System.Drawing.Font("Georgia", 42F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_title.Location = new System.Drawing.Point(368, 12);
             this.label_title.Name = "label_title";
@@ -202,7 +207,7 @@ namespace WindowsFormsApplicationTest {
             // label_pending
             // 
             this.label_pending.AutoSize = true;
-            this.label_pending.BackColor = System.Drawing.Color.White;
+            this.label_pending.BackColor = System.Drawing.Color.Transparent;
             this.label_pending.Font = new System.Drawing.Font("Segoe UI Symbol", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_pending.ForeColor = System.Drawing.Color.Black;
             this.label_pending.Location = new System.Drawing.Point(87, 266);
@@ -216,8 +221,11 @@ namespace WindowsFormsApplicationTest {
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.Transparent;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(987, 25);
@@ -235,7 +243,7 @@ namespace WindowsFormsApplicationTest {
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -243,10 +251,47 @@ namespace WindowsFormsApplicationTest {
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.expendAllNodesToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(42, 21);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpToolStripMenuItem1,
+            this.aboutAthenaToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(47, 21);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // helpToolStripMenuItem1
+            // 
+            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.helpToolStripMenuItem1.Text = "View Help";
+            // 
+            // aboutAthenaToolStripMenuItem
+            // 
+            this.aboutAthenaToolStripMenuItem.Name = "aboutAthenaToolStripMenuItem";
+            this.aboutAthenaToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.aboutAthenaToolStripMenuItem.Text = "About Athena";
+            // 
+            // expendAllNodesToolStripMenuItem
+            // 
+            this.expendAllNodesToolStripMenuItem.Name = "expendAllNodesToolStripMenuItem";
+            this.expendAllNodesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.expendAllNodesToolStripMenuItem.Text = "Expend All Nodes";
+            this.expendAllNodesToolStripMenuItem.Click += new System.EventHandler(this.expendAllNodesToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(987, 566);
             this.Controls.Add(this.label_pending);
             this.Controls.Add(this.label_itemFound);
@@ -263,7 +308,7 @@ namespace WindowsFormsApplicationTest {
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Athena (v1.0.0.0Beta)";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -290,6 +335,11 @@ namespace WindowsFormsApplicationTest {
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem openToolStripMenuItem;
         private OpenFileDialog openFileDialog1;
+        private ToolStripMenuItem editToolStripMenuItem;
+        private ToolStripMenuItem helpToolStripMenuItem;
+        private ToolStripMenuItem helpToolStripMenuItem1;
+        private ToolStripMenuItem aboutAthenaToolStripMenuItem;
+        private ToolStripMenuItem expendAllNodesToolStripMenuItem;
     }
 }
 
