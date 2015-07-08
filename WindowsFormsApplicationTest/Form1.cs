@@ -307,6 +307,15 @@ namespace WindowsFormsApplicationTest {
                 hidePending();
                 button_expandAll.Text="Collapse All Node";
             }
+            this.label_title.ForeColor=Color.FromArgb(0,0,0);
+        }
+
+        private void label_content_Click(object sender,EventArgs e) {
+
+        }
+
+        private void groupBox1_Enter(object sender,EventArgs e) {
+
         }
     }
 }
