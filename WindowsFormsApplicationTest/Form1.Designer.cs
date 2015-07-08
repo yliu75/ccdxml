@@ -8,7 +8,7 @@ namespace WindowsFormsApplicationTest {
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        public static string path = @"C:\Users\Administrator\Documents\C#\ClinicalDocument.xml";
+        public static string path = @"ClinicalDocument.xml";
 
         /// <summary>
         /// Clean up any resources being used.
