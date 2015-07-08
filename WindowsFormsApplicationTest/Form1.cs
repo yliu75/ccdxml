@@ -15,17 +15,17 @@ namespace WindowsFormsApplicationTest {
 
         //==========================================================================================
         //below this line is my own function definition
-        string fileName;
+        //string fileName;
         string labelText;
         string searchText;
         int itemFound;
         int colorPtr = 0;
-        int[] colorList = { 0,191,255,
-                           69,139,116,
-                          205,133,  0,
-                          199, 21,133,
-                          138, 43,226,
-                           65,105,225
+        int[] colorList = {157,206,255,
+                           250,190,125,
+                           210,255,166,
+                           203,155,255,
+                           244,252,146,
+                           201,201,201
         };
         int xmlIndex = 0;
         Label SelectedLabel = new Label();

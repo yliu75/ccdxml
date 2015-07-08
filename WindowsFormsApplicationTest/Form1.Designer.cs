@@ -81,12 +81,12 @@ namespace WindowsFormsApplicationTest {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expendAllNodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutAthenaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.expendAllNodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.menuStrip1.SuspendLayout();
@@ -97,9 +97,9 @@ namespace WindowsFormsApplicationTest {
             // treeView1
             // 
             this.treeView1.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treeView1.Location = new System.Drawing.Point(12, 67);
+            this.treeView1.Location = new System.Drawing.Point(16, 92);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(321, 452);
+            this.treeView1.Size = new System.Drawing.Size(321, 433);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
@@ -111,7 +111,7 @@ namespace WindowsFormsApplicationTest {
             this.label_title.BackColor = System.Drawing.Color.Transparent;
             this.label_title.Font = new System.Drawing.Font("Microsoft YaHei", 35.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_title.ForeColor = System.Drawing.Color.Gray;
-            this.label_title.Location = new System.Drawing.Point(379, 32);
+            this.label_title.Location = new System.Drawing.Point(355, 35);
             this.label_title.Name = "label_title";
             this.label_title.Size = new System.Drawing.Size(557, 60);
             this.label_title.TabIndex = 1;
@@ -145,10 +145,10 @@ namespace WindowsFormsApplicationTest {
             // 
             this.textbox_search.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textbox_search.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textbox_search.Location = new System.Drawing.Point(12, 34);
+            this.textbox_search.Location = new System.Drawing.Point(16, 58);
             this.textbox_search.Name = "textbox_search";
             this.textbox_search.ShortcutsEnabled = false;
-            this.textbox_search.Size = new System.Drawing.Size(236, 27);
+            this.textbox_search.Size = new System.Drawing.Size(240, 27);
             this.textbox_search.TabIndex = 8;
             this.textbox_search.TextChanged += new System.EventHandler(this.textbox_search_TextChanged);
             this.textbox_search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textbox_search_EnterClicked);
@@ -157,7 +157,7 @@ namespace WindowsFormsApplicationTest {
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(258, 34);
+            this.button1.Location = new System.Drawing.Point(262, 58);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 27);
             this.button1.TabIndex = 9;
@@ -169,7 +169,7 @@ namespace WindowsFormsApplicationTest {
             // 
             this.button_expandAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_expandAll.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_expandAll.Location = new System.Drawing.Point(163, 530);
+            this.button_expandAll.Location = new System.Drawing.Point(167, 530);
             this.button_expandAll.Name = "button_expandAll";
             this.button_expandAll.Size = new System.Drawing.Size(170, 33);
             this.button_expandAll.TabIndex = 10;
@@ -181,7 +181,7 @@ namespace WindowsFormsApplicationTest {
             // 
             this.button_expand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_expand.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_expand.Location = new System.Drawing.Point(13, 530);
+            this.button_expand.Location = new System.Drawing.Point(16, 530);
             this.button_expand.Name = "button_expand";
             this.button_expand.Size = new System.Drawing.Size(144, 33);
             this.button_expand.TabIndex = 11;
@@ -193,13 +193,15 @@ namespace WindowsFormsApplicationTest {
             // 
             this.label_itemFound.AutoSize = true;
             this.label_itemFound.BackColor = System.Drawing.Color.White;
-            this.label_itemFound.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_itemFound.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_itemFound.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label_itemFound.Location = new System.Drawing.Point(145, 37);
+            this.label_itemFound.Location = new System.Drawing.Point(11, 35);
             this.label_itemFound.Name = "label_itemFound";
-            this.label_itemFound.Size = new System.Drawing.Size(12, 17);
+            this.label_itemFound.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label_itemFound.Size = new System.Drawing.Size(73, 20);
             this.label_itemFound.TabIndex = 12;
-            this.label_itemFound.Text = " ";
+            this.label_itemFound.Text = "                ";
+            this.label_itemFound.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label_itemFound.Click += new System.EventHandler(this.label_itemFound_Click);
             // 
             // label_pending
@@ -226,7 +228,7 @@ namespace WindowsFormsApplicationTest {
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(987, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(977, 25);
             this.menuStrip1.TabIndex = 16;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -245,10 +247,6 @@ namespace WindowsFormsApplicationTest {
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -256,6 +254,13 @@ namespace WindowsFormsApplicationTest {
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(42, 21);
             this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // expendAllNodesToolStripMenuItem
+            // 
+            this.expendAllNodesToolStripMenuItem.Name = "expendAllNodesToolStripMenuItem";
+            this.expendAllNodesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.expendAllNodesToolStripMenuItem.Text = "Expend All Nodes";
+            this.expendAllNodesToolStripMenuItem.Click += new System.EventHandler(this.expendAllNodesToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -269,7 +274,7 @@ namespace WindowsFormsApplicationTest {
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(155, 22);
             this.helpToolStripMenuItem1.Text = "View Help";
             // 
             // aboutAthenaToolStripMenuItem
@@ -278,19 +283,16 @@ namespace WindowsFormsApplicationTest {
             this.aboutAthenaToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.aboutAthenaToolStripMenuItem.Text = "About Athena";
             // 
-            // expendAllNodesToolStripMenuItem
+            // openFileDialog1
             // 
-            this.expendAllNodesToolStripMenuItem.Name = "expendAllNodesToolStripMenuItem";
-            this.expendAllNodesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.expendAllNodesToolStripMenuItem.Text = "Expend All Nodes";
-            this.expendAllNodesToolStripMenuItem.Click += new System.EventHandler(this.expendAllNodesToolStripMenuItem_Click);
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.textbox_attributes);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.groupBox1.Location = new System.Drawing.Point(383, 102);
+            this.groupBox1.Location = new System.Drawing.Point(365, 107);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(575, 158);
             this.groupBox1.TabIndex = 17;
@@ -303,7 +305,7 @@ namespace WindowsFormsApplicationTest {
             this.groupBox2.Controls.Add(this.textbox_content);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.groupBox2.Location = new System.Drawing.Point(383, 266);
+            this.groupBox2.Location = new System.Drawing.Point(365, 271);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(575, 253);
             this.groupBox2.TabIndex = 18;
@@ -315,8 +317,9 @@ namespace WindowsFormsApplicationTest {
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(987, 566);
+            this.ClientSize = new System.Drawing.Size(977, 580);
             this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.label_title);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label_pending);
             this.Controls.Add(this.label_itemFound);
@@ -324,12 +327,11 @@ namespace WindowsFormsApplicationTest {
             this.Controls.Add(this.button_expandAll);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textbox_search);
-            this.Controls.Add(this.label_title);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Athena (v1.0.0.0Beta)";
+            this.Text = "Athena (v1.0.0.1Beta)";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
