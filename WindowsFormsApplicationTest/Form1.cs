@@ -27,6 +27,7 @@ namespace WindowsFormsApplicationTest {
                           138, 43,226,
                            65,105,225
         };
+        int xmlIndex = 0;
         Label SelectedLabel = new Label();
         TreeNode firstNode;
         TreeNode currentSelectedNode;
@@ -97,8 +98,9 @@ namespace WindowsFormsApplicationTest {
         }
         //check button text
         public void checkButtonText() {
-            if(this.currentSelectedNode.IsExpanded) this.button_expand.Text="Collapse Node";
-            else this.button_expand.Text="Expand Node";
+            if(this.currentSelectedNode!=null)
+                if(this.currentSelectedNode.IsExpanded) this.button_expand.Text="Collapse Node";
+                else this.button_expand.Text="Expand Node";
             if(firstNode.IsExpanded) button_expandAll.Text="Collapse All Node";
             else button_expandAll.Text="Expand All Node";
             //check if the textbox need a scroll bar
@@ -157,21 +159,20 @@ namespace WindowsFormsApplicationTest {
         //end of definition
         //==========================================================================================
         //setup fuction
-        public void setup() {
+        public void setup(Stream filePath) {
             //this.label_pending.Hide();
-            
-            StreamReader sr = new StreamReader(path,true);
+
+            StreamReader sr = new StreamReader(filePath,true);
             XDocument xdoc = XDocument.Load(sr);
-            fileName=getFileName(path);
-            firstNode=this.treeView1.Nodes.Add(fileName);
+            //fileName=getFileName(path);
+            firstNode=this.treeView1.Nodes.Add("CCDXml"+"_"+xmlIndex++);
             addTreeNode(firstNode,(XElement)xdoc.FirstNode);
         }
         public Form1() {
             labelText="defaultForm1";
             InitializeComponent();
-            setup();
             //load the xml file and add nodes to the tree view
-            
+
 
 
         }
@@ -286,6 +287,14 @@ namespace WindowsFormsApplicationTest {
 
         private void label_pending_Click(object sender,EventArgs e) {
 
+        }
+
+        private void openToolStripMenuItem_Click(object sender,EventArgs e) {
+            this.openFileDialog1.ShowDialog();
+            Stream fileStream;
+            if((fileStream=openFileDialog1.OpenFile())!=null) {
+                setup(fileStream);
+            }
         }
         //123test
     }

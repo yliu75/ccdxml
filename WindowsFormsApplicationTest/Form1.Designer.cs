@@ -8,7 +8,7 @@ namespace WindowsFormsApplicationTest {
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        public static string path = @"ClinicalDocument.xml";
+        public static Stream path;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -79,8 +79,12 @@ namespace WindowsFormsApplicationTest {
             this.button_expandAll = new System.Windows.Forms.Button();
             this.button_expand = new System.Windows.Forms.Button();
             this.label_itemFound = new System.Windows.Forms.Label();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.label_pending = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeView1
@@ -120,7 +124,7 @@ namespace WindowsFormsApplicationTest {
             this.textbox_attributes.Location = new System.Drawing.Point(383, 127);
             this.textbox_attributes.Multiline = true;
             this.textbox_attributes.Name = "textbox_attributes";
-            this.textbox_attributes.Size = new System.Drawing.Size(232, 92);
+            this.textbox_attributes.Size = new System.Drawing.Size(498, 92);
             this.textbox_attributes.TabIndex = 5;
             this.textbox_attributes.Text = " ";
             this.textbox_attributes.TextChanged += new System.EventHandler(this.textbox_attributes_TextChanged);
@@ -195,15 +199,6 @@ namespace WindowsFormsApplicationTest {
             this.label_itemFound.Text = " ";
             this.label_itemFound.Click += new System.EventHandler(this.label_itemFound_Click);
             // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Location = new System.Drawing.Point(621, 127);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(260, 92);
-            this.richTextBox2.TabIndex = 14;
-            this.richTextBox2.Text = "";
-            this.richTextBox2.TextChanged += new System.EventHandler(this.richTextBox2_TextChanged);
-            // 
             // label_pending
             // 
             this.label_pending.AutoSize = true;
@@ -219,13 +214,41 @@ namespace WindowsFormsApplicationTest {
             this.label_pending.Visible = false;
             this.label_pending.Click += new System.EventHandler(this.label_pending_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(987, 25);
+            this.menuStrip1.TabIndex = 16;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(39, 21);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(987, 566);
             this.Controls.Add(this.label_pending);
-            this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.label_itemFound);
             this.Controls.Add(this.button_expand);
             this.Controls.Add(this.button_expandAll);
@@ -237,8 +260,12 @@ namespace WindowsFormsApplicationTest {
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label_title);
             this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,8 +285,11 @@ namespace WindowsFormsApplicationTest {
         private Button button_expandAll;
         private Button button_expand;
         private Label label_itemFound;
-        private RichTextBox richTextBox2;
         private Label label_pending;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem openToolStripMenuItem;
+        private OpenFileDialog openFileDialog1;
     }
 }
 
