@@ -191,11 +191,25 @@ namespace WindowsFormsApplicationTest {
                 if(e.Node.Tag!=null) {
                     XElement nodeXElem = (XElement)e.Node.Tag;
                     if(nodeXElem.HasAttributes) {
-                        string nodeAttribute = nodeXElem.FirstAttribute.ToString();
+                        string nodeAttribute = "";
+                        foreach(var attr in nodeXElem.Attributes()) {
+                            nodeAttribute+=attr.ToString()+"\n";
+                            currentTarStr.Add(attr.ToString());
+                        }
                         this.richTextBox1.Text=nodeAttribute;//AppendText(nodeAttribute);
-                        if(leftQuotationMark(nodeAttribute)!=-1) {
-                            richTextBox1.Select(leftQuotationMark(nodeAttribute),rightQuotationMark(nodeAttribute));
+                        int start = 0, left = 0, right = 0;
+                        //find all the data and set them to bold
+                        while(start<nodeAttribute.Length&&(leftQuotationMark(nodeAttribute,start)!=-1)) {
+                            left=leftQuotationMark(nodeAttribute,start);
+                            right=rightQuotationMark(nodeAttribute,start);
+                            richTextBox1.Select(left,right-left);
                             richTextBox1.SelectionFont=new Font("Microsoft YaHei",12f,FontStyle.Bold);
+                            this.Update();
+                            start=right+1;
+                        }
+                        foreach(string str in currentTarStr) {
+                            int[] next_str = new int[str.Length];
+                            getNext(str,next_str);
                         }
                         //richTextBox2.AppendText();
                     } else this.richTextBox1.Text=" ";
@@ -228,6 +242,7 @@ namespace WindowsFormsApplicationTest {
             colorRestore(firstNode);
             itemFound=0;
             colorPtr=0;
+            this.currentTarStr=null;
             this.label_itemFound.Text=" ";
         }
         private void textbox_search_EnterClicked(object sender,KeyEventArgs e) {
@@ -301,19 +316,21 @@ namespace WindowsFormsApplicationTest {
                     setup(fileStream);
                     this.textbox_search.ReadOnly=false;
 
-                } } catch(Exception ex) { cutHead(ex.ToString()); }
+                }
+            } catch(Exception ex) { cutHead(ex.ToString()); }
         }
 
         private void expendAllNodesToolStripMenuItem_Click(object sender,EventArgs e) {
-            if(firstNode!=null)if(firstNode.IsExpanded) {
-                firstNode.Collapse(false);
-                button_expandAll.Text="Expand All Node";
-            } else {
-                showPending();
-                firstNode.ExpandAll();
-                hidePending();
-                button_expandAll.Text="Collapse All Node";
-            }
+            if(firstNode!=null)
+                if(firstNode.IsExpanded) {
+                    firstNode.Collapse(false);
+                    button_expandAll.Text="Expand All Node";
+                } else {
+                    showPending();
+                    firstNode.ExpandAll();
+                    hidePending();
+                    button_expandAll.Text="Collapse All Node";
+                }
             this.label_title.ForeColor=Color.FromArgb(0,0,0);
         }
 

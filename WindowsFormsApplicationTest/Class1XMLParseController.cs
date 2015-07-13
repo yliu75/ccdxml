@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Windows.Documents;
+using System.Collections.Generic;
 
 namespace WindowsFormsApplicationTest {
     public partial class Form1 {
@@ -20,6 +21,7 @@ namespace WindowsFormsApplicationTest {
                            244,252,146,
                            201,201,201
         };
+        List <string> currentTarStr=new List<String>();
         int xmlIndex = 0;
         System.Windows.Forms.Label SelectedLabel = new System.Windows.Forms.Label();
         TreeNode firstNode;
@@ -79,6 +81,54 @@ namespace WindowsFormsApplicationTest {
                     searchTreeView(tn,target);
             }
         }
+        //kmp algorithm
+        //next func
+        public static void getNext(string str,int[] next) {
+            int len = str.Length;
+            next[0]=-1;
+            int k=-1;
+            int j=0;
+            while(j<len-1) {
+                if(k==-1||str[j]==str[k]) {
+                    j++;
+                    k++;
+                    if(str[j]!=str[k])
+                        next[j]=k;     
+                    else
+                        next[j]=next[k];
+                } else k=next[k];
+                
+            }
+        }
+        public static int kmp(string str, string target,int[] next) {
+            int i=0,j=0;
+            int strLen=str.Length;
+            int tarLen=target.Length;
+            while(i<strLen&&j<tarLen) 
+                if(j==-1||str[i]==target[j]) {
+                    i++;
+                    j++;
+                } else j=next[j];
+            if(j==tarLen) return i-j;
+            else return -1;
+        }
+        //this func search content other than the node name
+        public void searchContent(TreeNode root,string target) {
+            if(root==null) return;
+            if(root.Tag!=null) {
+                string attrsStr = ((XElement)root.Tag).Attributes().ToString();
+                int[] next=new int[target.Length];
+                getNext(target,next);
+                if(kmp(attrsStr,target,next)!=-1) {
+                    expendNode(root);
+                    root.BackColor=Color.FromArgb(colorList[colorPtr],colorList[colorPtr+1],colorList[colorPtr+2]);
+                    itemFound++;
+                } else {
+                    foreach(TreeNode tn in root.Nodes)
+                        searchContent(tn,target);
+                }
+            }
+        }
         //check button text
         public void checkButtonText() {
             if(this.currentSelectedNode!=null)
@@ -103,33 +153,36 @@ namespace WindowsFormsApplicationTest {
                     string subString = targetString.Substring(i+1,stringPtr-i-1);
                     stringPtr=i;
                     searchTreeView(root,subString);
+                    searchContent(root,subString);
                     colorPtr+=3;
                     if(colorPtr>17) colorPtr=0;
                 }
             }
             if(!spaceFlag) {
                 searchTreeView(root,targetString);
+                searchContent(root,targetString);
                 colorPtr+=3;
                 if(colorPtr>17) colorPtr=0;
             } else {
                 searchTreeView(root,targetString.Substring(i+1,stringPtr));
+                searchContent(root,targetString.Substring(i+1,stringPtr));
                 colorPtr+=3;
                 if(colorPtr>17) colorPtr=0;
             }
         }
 
         //find the left quotation mark
-        public int leftQuotationMark(string str) {
-            for(int i = 0;i<str.Length;i++) {
+        public int leftQuotationMark(string str,int start) {
+            for(int i = start;i<str.Length;i++) {
                 if(str[i]=='\"') return i;
             }
             return -1;
         }
 
         //find the right quotaiton mark
-        public int rightQuotationMark(string str) {
+        public int rightQuotationMark(string str,int start) {
             bool flag = true;
-            for(int i = 0;i<str.Length;i++) {
+            for(int i = start;i<str.Length;i++) {
                 if(str[i]=='\"')
                     if(!flag) return i;
                     else flag=false;
