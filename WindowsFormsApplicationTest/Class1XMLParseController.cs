@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using System.Windows.Controls;
 using System.Windows.Documents;
 
 namespace WindowsFormsApplicationTest {
@@ -92,7 +84,7 @@ namespace WindowsFormsApplicationTest {
             if(this.currentSelectedNode!=null)
                 if(this.currentSelectedNode.IsExpanded) this.button_expand.Text="Collapse Node";
                 else this.button_expand.Text="Expand Node";
-            if(firstNode.IsExpanded) button_expandAll.Text="Collapse All Node";
+            if (firstNode!=null) if(firstNode.IsExpanded) button_expandAll.Text="Collapse All Node";
             else button_expandAll.Text="Expand All Node";
             //check if the textbox need a scroll bar
             if(this.textbox_content.Text.Length>=500)
@@ -125,6 +117,26 @@ namespace WindowsFormsApplicationTest {
                 if(colorPtr>17) colorPtr=0;
             }
         }
+
+        //find the left quotation mark
+        public int leftQuotationMark(string str) {
+            for(int i = 0;i<str.Length;i++) {
+                if(str[i]=='\"') return i;
+            }
+            return -1;
+        }
+
+        //find the right quotaiton mark
+        public int rightQuotationMark(string str) {
+            bool flag = true;
+            for(int i = 0;i<str.Length;i++) {
+                if(str[i]=='\"')
+                    if(!flag) return i;
+                    else flag=false;
+            }
+            return -1;
+        }
+
         public void showPending() {
             this.label_pending.Show();
             this.treeView1.Visible=false;
@@ -136,11 +148,15 @@ namespace WindowsFormsApplicationTest {
             this.label_pending.Hide();
             this.treeView1.Visible=true;
         }
-        public void richTextBox() {
+        public void richTextBoxContent() {
             FlowDocument flowDoc = new FlowDocument(new Paragraph(new Run("Simple FlowDocument")));
             Paragraph para1 = new Paragraph(new Run("abc"));
             //para1.FontStyle=FontStyle.Bold;
-            richTextBox1.Document=flowDoc;
+            richTextBox1.AppendText("abc");
+            richTextBox1.Font=new Font("Consolas",18f,FontStyle.Bold);
+            richTextBox1.AppendText("def");
+            richTextBox1.Select(2,5);
+            richTextBox1.SelectionFont = new Font("Consolas",12f,FontStyle.Bold);
         }
         //end of definition
         //==========================================================================================

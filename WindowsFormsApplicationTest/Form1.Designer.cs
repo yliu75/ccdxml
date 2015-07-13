@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Xml.Linq;
 using System.Windows.Forms;
-using System.Windows.Controls;
 
 namespace WindowsFormsApplicationTest {
     partial class Form1 {
@@ -70,8 +69,7 @@ namespace WindowsFormsApplicationTest {
         */
         private void InitializeComponent() {
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.Label_title = new System.Windows.Forms.Label();
-            this.textbox_attributes = new System.Windows.Forms.TextBox();
+            this.label_title = new System.Windows.Forms.Label();
             this.textbox_content = new System.Windows.Forms.TextBox();
             this.textbox_search = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -99,38 +97,26 @@ namespace WindowsFormsApplicationTest {
             // treeView1
             // 
             this.treeView1.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treeView1.Location = new System.Drawing.Point(16, 92);
+            this.treeView1.Location = new System.Drawing.Point(11, 122);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(321, 433);
+            this.treeView1.Size = new System.Drawing.Size(321, 452);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // label_title
             // 
-            this.Label_title.AccessibleName = "label";
-            this.Label_title.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
-            this.Label_title.AutoSize = true;
-            this.Label_title.BackColor = System.Drawing.Color.Transparent;
-            this.Label_title.Font = new System.Drawing.Font("Microsoft YaHei", 35.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_title.ForeColor = System.Drawing.Color.Gray;
-            this.Label_title.Location = new System.Drawing.Point(355, 35);
-            this.Label_title.Name = "label_title";
-            this.Label_title.Size = new System.Drawing.Size(557, 60);
-            this.Label_title.TabIndex = 1;
-            this.Label_title.Text = "Please open an xml file.";
-            this.Label_title.Click += new System.EventHandler(this.label_title_Click);
-            // 
-            // textbox_attributes
-            // 
-            this.textbox_attributes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textbox_attributes.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textbox_attributes.Location = new System.Drawing.Point(6, 20);
-            this.textbox_attributes.Multiline = true;
-            this.textbox_attributes.Name = "textbox_attributes";
-            this.textbox_attributes.Size = new System.Drawing.Size(563, 132);
-            this.textbox_attributes.TabIndex = 5;
-            this.textbox_attributes.Text = " ";
-            this.textbox_attributes.TextChanged += new System.EventHandler(this.textbox_attributes_TextChanged);
+            this.label_title.AccessibleName = "label";
+            this.label_title.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
+            this.label_title.AutoSize = true;
+            this.label_title.BackColor = System.Drawing.Color.Transparent;
+            this.label_title.Font = new System.Drawing.Font("Microsoft YaHei", 35.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_title.ForeColor = System.Drawing.Color.Gray;
+            this.label_title.Location = new System.Drawing.Point(379, 32);
+            this.label_title.Name = "label_title";
+            this.label_title.Size = new System.Drawing.Size(557, 60);
+            this.label_title.TabIndex = 1;
+            this.label_title.Text = "Please open an xml file.";
+            this.label_title.Click += new System.EventHandler(this.label_title_Click);
             // 
             // textbox_content
             // 
@@ -147,10 +133,11 @@ namespace WindowsFormsApplicationTest {
             // 
             this.textbox_search.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textbox_search.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textbox_search.Location = new System.Drawing.Point(16, 58);
+            this.textbox_search.Location = new System.Drawing.Point(12, 89);
             this.textbox_search.Name = "textbox_search";
+            this.textbox_search.ReadOnly = true;
             this.textbox_search.ShortcutsEnabled = false;
-            this.textbox_search.Size = new System.Drawing.Size(240, 27);
+            this.textbox_search.Size = new System.Drawing.Size(236, 27);
             this.textbox_search.TabIndex = 8;
             this.textbox_search.TextChanged += new System.EventHandler(this.textbox_search_TextChanged);
             this.textbox_search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textbox_search_EnterClicked);
@@ -159,7 +146,7 @@ namespace WindowsFormsApplicationTest {
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(262, 58);
+            this.button1.Location = new System.Drawing.Point(257, 89);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 27);
             this.button1.TabIndex = 9;
@@ -171,7 +158,7 @@ namespace WindowsFormsApplicationTest {
             // 
             this.button_expandAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_expandAll.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_expandAll.Location = new System.Drawing.Point(167, 530);
+            this.button_expandAll.Location = new System.Drawing.Point(162, 580);
             this.button_expandAll.Name = "button_expandAll";
             this.button_expandAll.Size = new System.Drawing.Size(170, 33);
             this.button_expandAll.TabIndex = 10;
@@ -183,7 +170,7 @@ namespace WindowsFormsApplicationTest {
             // 
             this.button_expand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_expand.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_expand.Location = new System.Drawing.Point(16, 530);
+            this.button_expand.Location = new System.Drawing.Point(12, 580);
             this.button_expand.Name = "button_expand";
             this.button_expand.Size = new System.Drawing.Size(144, 33);
             this.button_expand.TabIndex = 11;
@@ -195,15 +182,13 @@ namespace WindowsFormsApplicationTest {
             // 
             this.label_itemFound.AutoSize = true;
             this.label_itemFound.BackColor = System.Drawing.Color.White;
-            this.label_itemFound.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_itemFound.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_itemFound.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label_itemFound.Location = new System.Drawing.Point(11, 35);
+            this.label_itemFound.Location = new System.Drawing.Point(12, 67);
             this.label_itemFound.Name = "label_itemFound";
-            this.label_itemFound.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label_itemFound.Size = new System.Drawing.Size(73, 20);
+            this.label_itemFound.Size = new System.Drawing.Size(12, 17);
             this.label_itemFound.TabIndex = 12;
-            this.label_itemFound.Text = "                ";
-            this.label_itemFound.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label_itemFound.Text = " ";
             this.label_itemFound.Click += new System.EventHandler(this.label_itemFound_Click);
             // 
             // label_pending
@@ -212,7 +197,7 @@ namespace WindowsFormsApplicationTest {
             this.label_pending.BackColor = System.Drawing.Color.Transparent;
             this.label_pending.Font = new System.Drawing.Font("Microsoft YaHei", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_pending.ForeColor = System.Drawing.Color.Black;
-            this.label_pending.Location = new System.Drawing.Point(87, 266);
+            this.label_pending.Location = new System.Drawing.Point(94, 332);
             this.label_pending.Name = "label_pending";
             this.label_pending.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label_pending.Size = new System.Drawing.Size(154, 38);
@@ -230,7 +215,7 @@ namespace WindowsFormsApplicationTest {
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1306, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(974, 25);
             this.menuStrip1.TabIndex = 16;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -291,10 +276,10 @@ namespace WindowsFormsApplicationTest {
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textbox_attributes);
+            this.groupBox1.Controls.Add(this.richTextBox1);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.groupBox1.Location = new System.Drawing.Point(365, 107);
+            this.groupBox1.Location = new System.Drawing.Point(383, 102);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(575, 158);
             this.groupBox1.TabIndex = 17;
@@ -307,7 +292,7 @@ namespace WindowsFormsApplicationTest {
             this.groupBox2.Controls.Add(this.textbox_content);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.groupBox2.Location = new System.Drawing.Point(365, 271);
+            this.groupBox2.Location = new System.Drawing.Point(383, 266);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(575, 253);
             this.groupBox2.TabIndex = 18;
@@ -316,21 +301,21 @@ namespace WindowsFormsApplicationTest {
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(968, 116);
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Location = new System.Drawing.Point(6, 24);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(300, 96);
+            this.richTextBox1.Size = new System.Drawing.Size(563, 125);
             this.richTextBox1.TabIndex = 19;
             this.richTextBox1.Text = "";
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1306, 580);
-            this.Controls.Add(this.richTextBox1);
+            this.ClientSize = new System.Drawing.Size(974, 625);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.Label_title);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label_pending);
             this.Controls.Add(this.label_itemFound);
@@ -338,15 +323,15 @@ namespace WindowsFormsApplicationTest {
             this.Controls.Add(this.button_expandAll);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textbox_search);
+            this.Controls.Add(this.label_title);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Hades (v1.0.0.1Beta)";
+            this.Text = "Athena (v1.0.0.0Beta)";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -357,16 +342,15 @@ namespace WindowsFormsApplicationTest {
         #endregion
 
         public System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.Label label_title;
-        public System.Windows.Forms.Label l;
-        private System.Windows.Forms.TextBox textbox_attributes;
-        private System.Windows.Forms.TextBox textbox_content;
-        private System.Windows.Forms.TextBox textbox_search;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button_expandAll;
-        private System.Windows.Forms.Button button_expand;
-        private System.Windows.Forms.Label label_itemFound;
-        private System.Windows.Forms.Label label_pending;
+        public Label label_title;
+        public Label l;
+        private TextBox textbox_content;
+        private TextBox textbox_search;
+        private Button button1;
+        private Button button_expandAll;
+        private Button button_expand;
+        private Label label_itemFound;
+        private Label label_pending;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem openToolStripMenuItem;
@@ -376,19 +360,9 @@ namespace WindowsFormsApplicationTest {
         private ToolStripMenuItem helpToolStripMenuItem1;
         private ToolStripMenuItem aboutAthenaToolStripMenuItem;
         private ToolStripMenuItem expendAllNodesToolStripMenuItem;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Controls.RichTextBox richTextBox1;
-
-        public System.Windows.Forms.Label Label_title {
-            get {
-                return label_title;
-            }
-
-            set {
-                label_title=value;
-            }
-        }
+        private GroupBox groupBox1;
+        private GroupBox groupBox2;
+        private RichTextBox richTextBox1;
     }
 }
 

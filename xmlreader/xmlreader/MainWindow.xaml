@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:xmlreader"
         mc:Ignorable="d"
-        Title="MainWindow" Height="599" Width="802">
+        Title="MainWindow" Height="599" Width="1086.1">
     <Grid>
-        <TreeView x:Name="treeView" HorizontalAlignment="Left" Height="443" Margin="19,51,0,0" VerticalAlignment="Top" Width="213"/>
+        <TreeView x:Name="treeView" HorizontalAlignment="Left" Height="443" Margin="19,51,0,0" VerticalAlignment="Top" Width="297"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="19,23,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="213"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="241,23,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="19,499,0,0" VerticalAlignment="Top" Width="135"/>
+        <Button x:Name="button2" Content="Button" HorizontalAlignment="Left" Margin="159,499,0,0" VerticalAlignment="Top" Width="157"/>
+        <Label x:Name="label" Content="Please open an xml file." HorizontalAlignment="Left" Margin="377,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.05,0.192" Height="128" Width="627" FontSize="46.667"/>
 
     </Grid>
 </Window>

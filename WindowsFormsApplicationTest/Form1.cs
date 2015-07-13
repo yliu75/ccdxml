@@ -13,17 +13,19 @@ using System.Xml.Linq;
 namespace WindowsFormsApplicationTest {
     public partial class Form1:Form {
         /*
-        //string fileName;
+        //==========================================================================================
+        //below this line is my own function definition
+        string fileName;
         string labelText;
         string searchText;
         int itemFound;
         int colorPtr = 0;
-        int[] colorList = {157,206,255,
-                           250,190,125,
-                           210,255,166,
-                           203,155,255,
-                           244,252,146,
-                           201,201,201
+        int[] colorList = { 0,191,255,
+                           69,139,116,
+                          205,133,  0,
+                          199, 21,133,
+                          138, 43,226,
+                           65,105,225
         };
         int xmlIndex = 0;
         Label SelectedLabel = new Label();
@@ -39,7 +41,7 @@ namespace WindowsFormsApplicationTest {
                 }
             return filePath;
         }
-        
+
         public static int getHead(string s) {
             if(s=="")
                 return 0;
@@ -143,8 +145,8 @@ namespace WindowsFormsApplicationTest {
             this.label_pending.Hide();
             this.treeView1.Visible=true;
         }
-
         */
+
         //----------------------------------------------------
         //bug fixed
         //Bug 1
@@ -154,6 +156,8 @@ namespace WindowsFormsApplicationTest {
 
         //end of bugs
         //----------------------------------------------------
+        //end of definition
+        //==========================================================================================
         //setup fuction
         public void setup(Stream filePath) {
             //this.label_pending.Hide();
@@ -168,7 +172,7 @@ namespace WindowsFormsApplicationTest {
             labelText="defaultForm1";
             InitializeComponent();
             //load the xml file and add nodes to the tree view
-
+            //richTextBoxContent();
 
 
         }
@@ -180,17 +184,21 @@ namespace WindowsFormsApplicationTest {
             TreeNode selectedNode = this.treeView1.SelectedNode;
             if(selectedNode==null)
                 return;
-            else { 
+            else {
                 //MessageBox.Show(e.Node.Text);
                 labelText=e.Node.Text;
-                this.Label_title.Text=labelText;
+                this.label_title.Text=labelText;
                 if(e.Node.Tag!=null) {
                     XElement nodeXElem = (XElement)e.Node.Tag;
                     if(nodeXElem.HasAttributes) {
                         string nodeAttribute = nodeXElem.FirstAttribute.ToString();
-                        this.textbox_attributes.Text=nodeAttribute;
+                        this.richTextBox1.Text=nodeAttribute;//AppendText(nodeAttribute);
+                        if(leftQuotationMark(nodeAttribute)!=-1) {
+                            richTextBox1.Select(leftQuotationMark(nodeAttribute),rightQuotationMark(nodeAttribute));
+                            richTextBox1.SelectionFont=new Font("Microsoft YaHei",12f,FontStyle.Bold);
+                        }
                         //richTextBox2.AppendText();
-                    } else this.textbox_attributes.Text=" ";
+                    } else this.richTextBox1.Text=" ";
                     this.textbox_content.Text=nodeXElem.Value;
                 }
             }
@@ -288,13 +296,16 @@ namespace WindowsFormsApplicationTest {
         private void openToolStripMenuItem_Click(object sender,EventArgs e) {
             this.openFileDialog1.ShowDialog();
             Stream fileStream;
-            if((fileStream=openFileDialog1.OpenFile())!=null) {
-                setup(fileStream);
-            }
+            try {
+                if((fileStream=openFileDialog1.OpenFile())!=null) {
+                    setup(fileStream);
+                    this.textbox_search.ReadOnly=false;
+
+                } } catch(Exception ex) { cutHead(ex.ToString()); }
         }
 
         private void expendAllNodesToolStripMenuItem_Click(object sender,EventArgs e) {
-            if(firstNode.IsExpanded) {
+            if(firstNode!=null)if(firstNode.IsExpanded) {
                 firstNode.Collapse(false);
                 button_expandAll.Text="Expand All Node";
             } else {
@@ -303,7 +314,7 @@ namespace WindowsFormsApplicationTest {
                 hidePending();
                 button_expandAll.Text="Collapse All Node";
             }
-            //this.label_title.ForeColor=Color.FromArgb(0,0,0);
+            this.label_title.ForeColor=Color.FromArgb(0,0,0);
         }
 
         private void label_content_Click(object sender,EventArgs e) {
@@ -311,6 +322,10 @@ namespace WindowsFormsApplicationTest {
         }
 
         private void groupBox1_Enter(object sender,EventArgs e) {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender,EventArgs e) {
 
         }
     }
