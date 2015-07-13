@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Xml.Linq;
 using System.Windows.Forms;
+using System.Windows.Controls;
 
 namespace WindowsFormsApplicationTest {
     partial class Form1 {
@@ -69,7 +70,7 @@ namespace WindowsFormsApplicationTest {
         */
         private void InitializeComponent() {
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.label_title = new System.Windows.Forms.Label();
+            this.Label_title = new System.Windows.Forms.Label();
             this.textbox_attributes = new System.Windows.Forms.TextBox();
             this.textbox_content = new System.Windows.Forms.TextBox();
             this.textbox_search = new System.Windows.Forms.TextBox();
@@ -89,6 +90,7 @@ namespace WindowsFormsApplicationTest {
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -105,18 +107,18 @@ namespace WindowsFormsApplicationTest {
             // 
             // label_title
             // 
-            this.label_title.AccessibleName = "label";
-            this.label_title.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
-            this.label_title.AutoSize = true;
-            this.label_title.BackColor = System.Drawing.Color.Transparent;
-            this.label_title.Font = new System.Drawing.Font("Microsoft YaHei", 35.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_title.ForeColor = System.Drawing.Color.Gray;
-            this.label_title.Location = new System.Drawing.Point(355, 35);
-            this.label_title.Name = "label_title";
-            this.label_title.Size = new System.Drawing.Size(557, 60);
-            this.label_title.TabIndex = 1;
-            this.label_title.Text = "Please open an xml file.";
-            this.label_title.Click += new System.EventHandler(this.label_title_Click);
+            this.Label_title.AccessibleName = "label";
+            this.Label_title.AccessibleRole = System.Windows.Forms.AccessibleRole.TitleBar;
+            this.Label_title.AutoSize = true;
+            this.Label_title.BackColor = System.Drawing.Color.Transparent;
+            this.Label_title.Font = new System.Drawing.Font("Microsoft YaHei", 35.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_title.ForeColor = System.Drawing.Color.Gray;
+            this.Label_title.Location = new System.Drawing.Point(355, 35);
+            this.Label_title.Name = "label_title";
+            this.Label_title.Size = new System.Drawing.Size(557, 60);
+            this.Label_title.TabIndex = 1;
+            this.Label_title.Text = "Please open an xml file.";
+            this.Label_title.Click += new System.EventHandler(this.label_title_Click);
             // 
             // textbox_attributes
             // 
@@ -228,7 +230,7 @@ namespace WindowsFormsApplicationTest {
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(977, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(1306, 25);
             this.menuStrip1.TabIndex = 16;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -312,14 +314,23 @@ namespace WindowsFormsApplicationTest {
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Content";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(968, 116);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(300, 96);
+            this.richTextBox1.TabIndex = 19;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(977, 580);
+            this.ClientSize = new System.Drawing.Size(1306, 580);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.label_title);
+            this.Controls.Add(this.Label_title);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label_pending);
             this.Controls.Add(this.label_itemFound);
@@ -331,7 +342,7 @@ namespace WindowsFormsApplicationTest {
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Athena (v1.0.0.1Beta)";
+            this.Text = "Hades (v1.0.0.1Beta)";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -346,16 +357,16 @@ namespace WindowsFormsApplicationTest {
         #endregion
 
         public System.Windows.Forms.TreeView treeView1;
-        public Label label_title;
-        public Label l;
-        private TextBox textbox_attributes;
-        private TextBox textbox_content;
-        private TextBox textbox_search;
-        private Button button1;
-        private Button button_expandAll;
-        private Button button_expand;
-        private Label label_itemFound;
-        private Label label_pending;
+        private System.Windows.Forms.Label label_title;
+        public System.Windows.Forms.Label l;
+        private System.Windows.Forms.TextBox textbox_attributes;
+        private System.Windows.Forms.TextBox textbox_content;
+        private System.Windows.Forms.TextBox textbox_search;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_expandAll;
+        private System.Windows.Forms.Button button_expand;
+        private System.Windows.Forms.Label label_itemFound;
+        private System.Windows.Forms.Label label_pending;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem openToolStripMenuItem;
@@ -365,8 +376,19 @@ namespace WindowsFormsApplicationTest {
         private ToolStripMenuItem helpToolStripMenuItem1;
         private ToolStripMenuItem aboutAthenaToolStripMenuItem;
         private ToolStripMenuItem expendAllNodesToolStripMenuItem;
-        private GroupBox groupBox1;
-        private GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Controls.RichTextBox richTextBox1;
+
+        public System.Windows.Forms.Label Label_title {
+            get {
+                return label_title;
+            }
+
+            set {
+                label_title=value;
+            }
+        }
     }
 }
 

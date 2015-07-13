@@ -12,9 +12,7 @@ using System.Xml.Linq;
 
 namespace WindowsFormsApplicationTest {
     public partial class Form1:Form {
-
-        //==========================================================================================
-        //below this line is my own function definition
+        /*
         //string fileName;
         string labelText;
         string searchText;
@@ -41,7 +39,7 @@ namespace WindowsFormsApplicationTest {
                 }
             return filePath;
         }
-
+        
         public static int getHead(string s) {
             if(s=="")
                 return 0;
@@ -146,7 +144,7 @@ namespace WindowsFormsApplicationTest {
             this.treeView1.Visible=true;
         }
 
-
+        */
         //----------------------------------------------------
         //bug fixed
         //Bug 1
@@ -156,8 +154,6 @@ namespace WindowsFormsApplicationTest {
 
         //end of bugs
         //----------------------------------------------------
-        //end of definition
-        //==========================================================================================
         //setup fuction
         public void setup(Stream filePath) {
             //this.label_pending.Hide();
@@ -184,10 +180,10 @@ namespace WindowsFormsApplicationTest {
             TreeNode selectedNode = this.treeView1.SelectedNode;
             if(selectedNode==null)
                 return;
-            else {
+            else { 
                 //MessageBox.Show(e.Node.Text);
                 labelText=e.Node.Text;
-                this.label_title.Text=labelText;
+                this.Label_title.Text=labelText;
                 if(e.Node.Tag!=null) {
                     XElement nodeXElem = (XElement)e.Node.Tag;
                     if(nodeXElem.HasAttributes) {
@@ -307,7 +303,7 @@ namespace WindowsFormsApplicationTest {
                 hidePending();
                 button_expandAll.Text="Collapse All Node";
             }
-            this.label_title.ForeColor=Color.FromArgb(0,0,0);
+            //this.label_title.ForeColor=Color.FromArgb(0,0,0);
         }
 
         private void label_content_Click(object sender,EventArgs e) {
