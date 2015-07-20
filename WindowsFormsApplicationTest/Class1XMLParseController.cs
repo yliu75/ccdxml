@@ -1,11 +1,21 @@
 ﻿#define SEARCH_ON
-
+//================================================================================================//
+//  Project xmlExplorer                                                                           //
+//  Author: Yonglun Liu                                                                           //
+//  Date:2015/07/20                                                                               //
+//                                                                                                //
+//  Instruction:                                                                                  //
+//  Pretty self explained appliction                                                              //
+//                                                                                                //
+//  If any further support is needed email me:yliu75 at syr dot edu                               //
+//================================================================================================//
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using System.Reflection;
 using System.Diagnostics;
+using System.Threading.Tasks;
+
 namespace WindowsFormsApplicationTest {
     public partial class Form1 {
         //==========================================================================================
@@ -37,16 +47,23 @@ namespace WindowsFormsApplicationTest {
             else return res[1];
         }
         //function that add nodes to treeviews form the xml file
-        public static void addTn(TreeNode parentNode,XElement ele) {
-            if(parentNode==null||ele==null||ele.Name==null||ele.Name.ToString()==null)
-                return;
-            string nodeName = cutHead(ele.Name.ToString());
-            if(nodeName==null)
-                return;
-            var treeN = parentNode.Nodes.Add(cutHead(ele.Name.ToString()));
-            treeN.Tag=ele;
-            foreach(XElement node in ele.Elements())
-                addTn(treeN,node);
+        public  static void addTn(TreeNode parentNode,XElement ele) {
+        //await Task.Run(async() => {
+            try {
+                if(parentNode==null||ele==null||ele.Name==null||ele.Name.ToString()==null)
+                    return;
+                string nodeName = cutHead(ele.Name.ToString());
+                if(nodeName==null)
+                    return;
+                var treeN = parentNode.Nodes.Add(cutHead(ele.Name.ToString()));
+                treeN.Tag=ele;
+                foreach(XElement node in ele.Elements())
+                    addTn(treeN,node);
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+            }
+       // });
+
         }
         //expendnode and all its parent,grandparent, grandgrandparents,etc..
         public static void expendNode(TreeNode child) {
@@ -261,7 +278,7 @@ namespace WindowsFormsApplicationTest {
         //end of definition
         //==========================================================================================
         //----------------------------------------------------
-        //bug fixed
+        //bug collection
         //Bug 1
         //Problem: Multiple enter pressed or multiple search clicked
         //Solution :if(textbox_search.Text.Equals(searchText,StringComparison.OrdinalIgnoreCase)) return;
@@ -269,6 +286,27 @@ namespace WindowsFormsApplicationTest {
         //Bug 2
         //Problem: Asthma searched return no results.
         //Solution: It fixed per se...
+        //
+        //Bug 3
+        //Problem: When the search target array end with space char, getnext will throw a outofrange
+        //exception
+        //Solution:Add a if in searchTxt();
+        //
+        //Bug 4
+        //Problem: when more than 6 items was searched oor exception for colorPtr
+        //Solution:Add a detection for the numbers of items searched. If exceeded 6, lock the search textbox.
+        //Only backspace could be entered and in and only in this case, search textbox will be unlock.
+        //
+        //Bug 5
+        //Problem: when six items was input and end with a space. oor ex thrown.
+        //Solution: add a color set in color list.
+        //
+        //Bug 6
+        //Problem: when Chinese char is existed, can display correct. But if select Chinese char node. Ex thrown.
+        //No solution yet.
+        //
+        //Bug 7
+        //
         //end of bugs
         //----------------------------------------------------
     }
