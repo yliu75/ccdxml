@@ -9,7 +9,7 @@ namespace WindowsFormsApplicationTest {
     public partial class Form1:Form {
         public void setup(Stream filePath) {
             StreamReader sr = new StreamReader(filePath,true);
-            XDocument xdoc = XDocument.Load(sr);
+            XDocument xdoc =XDocument.Load(sr);
             //XDocument xdoc = new XDocument();
             firstNode=this.treeView1.Nodes.Add("CCDXml"+"_"+xmlIndex++);
             addTn(firstNode,(XElement)xdoc.FirstNode);
@@ -103,7 +103,9 @@ namespace WindowsFormsApplicationTest {
             Stream fileStream;
             try {
                 if((fileStream=openFileDialog1.OpenFile())!=null) {
+                    showP();
                     setup(fileStream);
+                    hideP();
                     this.textbox_search.ReadOnly=false;
                 }
             } catch(Exception ex) { cutHead(ex.ToString()); }

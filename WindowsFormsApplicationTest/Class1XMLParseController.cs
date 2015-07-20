@@ -155,17 +155,17 @@ namespace WindowsFormsApplicationTest {
             int i = tarStr.Length, stringPtr = i;
             //check if there is space
             bool spaceFlag = false;
-            while(i-->0) 
+            while(i-->0)
                 if(tarStr[i]==' ') {
                     spaceFlag=true;
                     string subStr = tarStr.Substring(i+1,stringPtr-i-1);
                     stringPtr=i;
                     searchLogic(root,subStr);
                 }
-            
-            if(!spaceFlag) 
+
+            if(!spaceFlag)
                 searchLogic(root,tarStr);
-             else 
+            else
                 searchLogic(root,tarStr.Substring(i+1,stringPtr));
         }
 
@@ -239,19 +239,21 @@ namespace WindowsFormsApplicationTest {
         [Conditional("SEARCH_ON")]
         public void highlight() {
             //try {
-                foreach(string str in currentTarStr) {
-                    int aRes = searchTxt(this.richTextBox1.Text,str);
-                    int cRes = searchTxt(this.textbox_content.Text,str);
-                    if(aRes!=-1) {
-                        richTextBox1.Select(aRes,str.Length);
-                        richTextBox1.SelectionBackColor=Color.FromArgb(cLst[0],cLst[1],cLst[2]);
-                    }
-                    if(cRes!=-1) {
-                        textbox_content.Select(cRes,str.Length);
-                        textbox_content.SelectionBackColor=Color.FromArgb(cLst[0],cLst[1],cLst[2]);
-                    }
+            int colorPtr = (currentTarStr.Length-1)*3;
+            foreach(string str in currentTarStr) {
+                int aRes = searchTxt(this.richTextBox1.Text,str);
+                int cRes = searchTxt(this.textbox_content.Text,str);
+                if(aRes!=-1) {
+                    richTextBox1.Select(aRes,str.Length);
+                    richTextBox1.SelectionBackColor=Color.FromArgb(cLst[colorPtr],cLst[colorPtr+1],cLst[colorPtr+2]);
                 }
-           // } catch(Exception ex) { ex.ToString(); }
+                if(cRes!=-1) {
+                    textbox_content.Select(cRes,str.Length);
+                    textbox_content.SelectionBackColor=Color.FromArgb(cLst[colorPtr],cLst[colorPtr+1],cLst[colorPtr+2]);
+                }
+                colorPtr-=3;
+            }
+            // } catch(Exception ex) { ex.ToString(); }
         }
 
         //end of definition
