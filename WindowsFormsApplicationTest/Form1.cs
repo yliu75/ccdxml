@@ -52,7 +52,12 @@ namespace WindowsFormsApplicationTest {
             currentTarStr=null;
             this.label_itemFound.Text=" ";
             currentTarStr=textbox_search.Text.ToString().Split(' ');
+            if(currentTarStr.Length>6) {
+                textbox_search.ReadOnly=true;
+                label_itemFound.Text="You can search atmost 6 items at once.";
+            }
         }
+
         private void textbox_search_EnterClicked(object sender,KeyEventArgs e) {
             if(e.KeyData==Keys.Enter) {
                 if(textbox_search.Text.Equals(searchText,StringComparison.OrdinalIgnoreCase)) return;
@@ -62,6 +67,9 @@ namespace WindowsFormsApplicationTest {
                 hideP();
                 this.label_itemFound.Text=itmsFd.ToString()+(itmsFd>1 ? " items found" : " item found");
 
+            }else if(e.KeyData==Keys.Back) {
+                textbox_search.ReadOnly=false;
+                label_itemFound.Text="";
             }
             checkBTxt();
         }
