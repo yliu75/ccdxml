@@ -19,6 +19,7 @@ namespace WindowsFormsApplicationTest {
                         210,255,166,
                         203,155,255,
                         244,252,146,
+                        201,201,201,
                         201,201,201
         };//color array
         String[] currentTarStr = null;
@@ -102,6 +103,7 @@ namespace WindowsFormsApplicationTest {
             else return -1;
         }
         public static int searchTxt(string str,string target) {
+            if(target.Length==0) return -1;
             int[] next = new int[target.Length];
             getNext(target,next);
             return kmp(str,target,next);

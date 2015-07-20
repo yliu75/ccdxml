@@ -9,7 +9,7 @@ namespace WindowsFormsApplicationTest {
     public partial class Form1:Form {
         public void setup(Stream filePath) {
             StreamReader sr = new StreamReader(filePath,true);
-            XDocument xdoc =XDocument.Load(sr);
+            XDocument xdoc = XDocument.Load(sr);
             //XDocument xdoc = new XDocument();
             firstNode=this.treeView1.Nodes.Add("CCDXml"+"_"+xmlIndex++);
             addTn(firstNode,(XElement)xdoc.FirstNode);
@@ -39,7 +39,7 @@ namespace WindowsFormsApplicationTest {
                     highlight();
 
                 } else this.richTextBox1.Text=" ";
-                
+
             }
 
             //endif selected node is null
@@ -63,11 +63,12 @@ namespace WindowsFormsApplicationTest {
                 if(textbox_search.Text.Equals(searchText,StringComparison.OrdinalIgnoreCase)) return;
                 searchText=textbox_search.Text;
                 showP();
-                advSearch(firstNode,searchText);
+                foreach(TreeNode tn in treeView1.Nodes)
+                    advSearch(tn,searchText);
                 hideP();
                 this.label_itemFound.Text=itmsFd.ToString()+(itmsFd>1 ? " items found" : " item found");
 
-            }else if(e.KeyData==Keys.Back) {
+            } else if(e.KeyData==Keys.Back) {
                 textbox_search.ReadOnly=false;
                 label_itemFound.Text="";
             }
@@ -78,7 +79,8 @@ namespace WindowsFormsApplicationTest {
             if(textbox_search.Text.Equals(searchText,StringComparison.OrdinalIgnoreCase)) return;
             searchText=textbox_search.Text;
             showP();
-            advSearch(firstNode,searchText);
+            foreach(TreeNode tn in treeView1.Nodes)
+                advSearch(tn,searchText);
             hideP();
             this.label_itemFound.Text=itmsFd.ToString()+(itmsFd>1 ? " items found" : " item found");
         }
