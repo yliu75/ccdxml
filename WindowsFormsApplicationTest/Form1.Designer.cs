@@ -54,6 +54,7 @@ namespace WindowsFormsApplicationTest {
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.label_copyright = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -87,10 +88,10 @@ namespace WindowsFormsApplicationTest {
             this.textbox_content.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textbox_content.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textbox_content.Location = new System.Drawing.Point(6, 24);
-            this.textbox_content.Multiline = true;
             this.textbox_content.Name = "textbox_content";
             this.textbox_content.Size = new System.Drawing.Size(563, 278);
             this.textbox_content.TabIndex = 7;
+            this.textbox_content.Text = "";
             // 
             // textbox_search
             // 
@@ -280,12 +281,24 @@ namespace WindowsFormsApplicationTest {
             this.webBrowser1.Visible = false;
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
+            // label_copyright
+            // 
+            this.label_copyright.AutoSize = true;
+            this.label_copyright.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label_copyright.Location = new System.Drawing.Point(669, 604);
+            this.label_copyright.Name = "label_copyright";
+            this.label_copyright.Size = new System.Drawing.Size(293, 12);
+            this.label_copyright.TabIndex = 19;
+            this.label_copyright.Text = "Copyright 2015 © By Ames It and Numeric Solution";
+            this.label_copyright.Click += new System.EventHandler(this.label1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(974, 625);
+            this.Controls.Add(this.label_copyright);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label_pending);
@@ -299,12 +312,11 @@ namespace WindowsFormsApplicationTest {
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Athena (v1.0.0.0Beta)";
+            this.Text = "XMLExplorer(v1.0.0.0Beta)";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -335,6 +347,7 @@ namespace WindowsFormsApplicationTest {
         private GroupBox groupBox2;
         private RichTextBox richTextBox1;
         private WebBrowser webBrowser1;
+        private Label label_copyright;
     }
 }
 

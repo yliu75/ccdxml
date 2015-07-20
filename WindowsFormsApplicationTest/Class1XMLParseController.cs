@@ -14,12 +14,12 @@ namespace WindowsFormsApplicationTest {
         string searchText;
         int itmsFd;
         int cPtr = 0;//color index pointer
-        int[] cLst = {157,206,255,
-                           250,190,125,
-                           210,255,166,
-                           203,155,255,
-                           244,252,146,
-                           201,201,201
+        int[] cLst = {  157,206,255,
+                        250,190,125,
+                        210,255,166,
+                        203,155,255,
+                        244,252,146,
+                        201,201,201
         };//color array
         String[] currentTarStr = null;
         int xmlIndex = 0;
