@@ -36,6 +36,7 @@ namespace WindowsFormsApplicationTest {
         };//color array
         String[] currentTarStr = null;
         int xmlIndex = 0;
+        static int totalNodes = 0,maxDepth=0;
         System.Windows.Forms.Label SelectedLabel = new System.Windows.Forms.Label();
         TreeNode firstNode;
         TreeNode currentSelectedNode;
@@ -68,19 +69,21 @@ namespace WindowsFormsApplicationTest {
             while(xEle.GetType().IsEquivalentTo(typeof(XComment))) xEle=xEle.NextNode;
             
             await Task.Run(async () => {
-                await addTn(firstNode,(XElement)xEle);
+                await addTn(firstNode,(XElement)xEle,maxDepth);
                 //treeView1.Nodes.Insert(0,firstNode); <--this will cause infinitly pending...
                 //tnInsertion(firstNode);
             });
             //VirtualizingStackPanel.SetIsVirtualizing(treeView1,true);
             treeView1.Nodes.Insert(0,firstNode);
+            //((XElement)firstNode.Tag)="Total "+totalNodes+" nodes loaded.\nMaximum depth is "+maxDepth;
         }
         
 
 
         //function that add nodes to treeviews form the xml file
-        public async static Task addTn(TreeNode parentNode,XElement ele) {
-        //await Task.Run(async() => {//delete this to boost the loading speed to x10
+        public async static Task addTn(TreeNode parentNode,XElement ele,int depth) {
+            //await Task.Run(async() => {//delete this to boost the loading speed to x10
+            if(depth>maxDepth) maxDepth=depth;
             try {
                 if(parentNode==null||ele==null||ele.Name==null||ele.Name.ToString()==null)
                     return;
@@ -89,8 +92,9 @@ namespace WindowsFormsApplicationTest {
                     return;
                 var treeN = parentNode.Nodes.Add(cutHead(ele.Name.ToString()));
                 treeN.Tag=ele;
+                totalNodes++;
                 foreach(XElement node in ele.Elements())
-                   await addTn(treeN,node);
+                   await addTn(treeN,node,depth+1);
             } catch(Exception e) {
                 Console.WriteLine(e.Message);
             }
