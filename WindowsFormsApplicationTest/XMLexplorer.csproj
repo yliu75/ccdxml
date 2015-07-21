@@ -25,7 +25,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>9858</ApplicationRevision>
+    <ApplicationRevision>9859</ApplicationRevision>
     <ApplicationVersion>3.4.107.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

@@ -15,12 +15,14 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.IO;
+using System.Windows.Controls;
 
 namespace WindowsFormsApplicationTest {
     public partial class Form1 {
         //==========================================================================================
         //below this line is my own function definition
-        string labelText;
+        //string labelText;
         string searchText;
         int itmsFd;
         int cPtr = 0;//color index pointer
@@ -46,9 +48,39 @@ namespace WindowsFormsApplicationTest {
             if(res.Length==1) return res[0];
             else return res[1];
         }
+        private void tnInsertion(TreeNode tn) {
+            if(InvokeRequired) {
+                Invoke((Action<TreeNode>)tnInsertion,tn);
+                return;
+            }
+            treeView1.Nodes.Insert(0,tn);
+        }
+        public async Task setup(Stream filePath) {
+            StreamReader sr = new StreamReader(filePath,true);
+            XDocument xdoc=null;
+            await Task.Run(() => {
+                xdoc = XDocument.Load(sr);
+            });
+            //XDocument xdoc = new XDocument();
+            //firstNode=this.treeView1.Nodes.Add();
+            firstNode=new TreeNode("CCDXml"+"_"+xmlIndex++);
+            XNode xEle = xdoc.FirstNode;
+            while(xEle.GetType().IsEquivalentTo(typeof(XComment))) xEle=xEle.NextNode;
+            
+            await Task.Run(async () => {
+                await addTn(firstNode,(XElement)xEle);
+                //treeView1.Nodes.Insert(0,firstNode); <--this will cause infinitly pending...
+                //tnInsertion(firstNode);
+            });
+            //VirtualizingStackPanel.SetIsVirtualizing(treeView1,true);
+            treeView1.Nodes.Insert(0,firstNode);
+        }
+        
+
+
         //function that add nodes to treeviews form the xml file
-        public  static void addTn(TreeNode parentNode,XElement ele) {
-        //await Task.Run(async() => {
+        public async static Task addTn(TreeNode parentNode,XElement ele) {
+        //await Task.Run(async() => {//delete this to boost the loading speed to x10
             try {
                 if(parentNode==null||ele==null||ele.Name==null||ele.Name.ToString()==null)
                     return;
@@ -58,11 +90,11 @@ namespace WindowsFormsApplicationTest {
                 var treeN = parentNode.Nodes.Add(cutHead(ele.Name.ToString()));
                 treeN.Tag=ele;
                 foreach(XElement node in ele.Elements())
-                    addTn(treeN,node);
+                   await addTn(treeN,node);
             } catch(Exception e) {
                 Console.WriteLine(e.Message);
             }
-       // });
+        //});
 
         }
         //expendnode and all its parent,grandparent, grandgrandparents,etc..
@@ -104,7 +136,6 @@ namespace WindowsFormsApplicationTest {
                     if(str[j]!=str[k]) next[j]=k;
                     else next[j]=next[k];
                 } else k=next[k];
-
         }
         public static int kmp(string str,string target,int[] next) {
             int i = 0, j = 0;
@@ -257,7 +288,7 @@ namespace WindowsFormsApplicationTest {
         }
         [Conditional("SEARCH_ON")]
         public void highlight() {
-            //try {
+            try {
             int colorPtr = (currentTarStr.Length-1)*3;
             foreach(string str in currentTarStr) {
                 int aRes = searchTxt(this.richTextBox1.Text,str);
@@ -272,7 +303,7 @@ namespace WindowsFormsApplicationTest {
                 }
                 colorPtr-=3;
             }
-            // } catch(Exception ex) { ex.ToString(); }
+             } catch(Exception ex) { ex.ToString(); }
         }
 
         //end of definition
@@ -306,8 +337,11 @@ namespace WindowsFormsApplicationTest {
         //No solution yet.
         //
         //Bug 7
-        //
+        //Problem: errors occur when the xml file starts with XComments element
+        //Solution: skip all the comments
         //end of bugs
         //----------------------------------------------------
+        //Asynchronizational optmised for UI and loading 
+        //Hiding treeview can accelerate the UI speed
     }
 }

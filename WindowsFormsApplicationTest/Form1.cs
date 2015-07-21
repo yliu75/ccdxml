@@ -5,17 +5,13 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
+
 namespace WindowsFormsApplicationTest {
     public partial class Form1:Form {
-        public void setup(Stream filePath) {
-            StreamReader sr = new StreamReader(filePath,true);
-            XDocument xdoc = XDocument.Load(sr);
-            //XDocument xdoc = new XDocument();
-            firstNode=this.treeView1.Nodes.Add("CCDXml"+"_"+xmlIndex++);
-            addTn(firstNode,(XElement)xdoc.FirstNode);
-        }
+
         public Form1() {
-            labelText="defaultForm1";
+            //labelText="defaultForm1";
             InitializeComponent();
         }
 
@@ -32,7 +28,7 @@ namespace WindowsFormsApplicationTest {
             if(selectedNode==null)
                 return;
             else {
-                this.label_title.Text=labelText;
+                this.label_title.Text=cutHead(e.Node.Text);
                 if(e.Node.Tag!=null) {
                     this.textbox_content.Text=((XElement)e.Node.Tag).Value;
                     setBold(e);
@@ -98,23 +94,25 @@ namespace WindowsFormsApplicationTest {
         }
 
         private void button_expand_Click(object sender,EventArgs e) {
-            if(currentSelectedNode.IsExpanded) {
-                currentSelectedNode.Collapse(false);
-                button_expand.Text="Expand Node";
-            } else {
-                showP();
-                currentSelectedNode.Expand();
-                hideP();
-                button_expand.Text="Collapse Node";
-            }
+            try {
+                if(currentSelectedNode.IsExpanded) {
+                    currentSelectedNode.Collapse(false);
+                    button_expand.Text="Expand Node";
+                } else {
+                    showP();
+                    currentSelectedNode.Expand();
+                    hideP();
+                    button_expand.Text="Collapse Node";
+                }
+            } catch(Exception) { };
         }
-        private void openToolStripMenuItem_Click(object sender,EventArgs e) {
+        private async void openToolStripMenuItem_Click(object sender,EventArgs e) {
             this.openFileDialog1.ShowDialog();
             Stream fileStream;
             try {
                 if((fileStream=openFileDialog1.OpenFile())!=null) {
                     showP();
-                    setup(fileStream);
+                    await setup(fileStream);
                     hideP();
                     this.textbox_search.ReadOnly=false;
                 }
@@ -148,6 +146,10 @@ namespace WindowsFormsApplicationTest {
         }
 
         private void label1_Click(object sender,EventArgs e) {
+
+        }
+
+        private void label_title_Click(object sender,EventArgs e) {
 
         }
     }

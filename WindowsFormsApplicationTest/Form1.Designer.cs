@@ -82,6 +82,7 @@ namespace WindowsFormsApplicationTest {
             this.label_title.Size = new System.Drawing.Size(557, 60);
             this.label_title.TabIndex = 1;
             this.label_title.Text = "Please open an xml file.";
+            this.label_title.Click += new System.EventHandler(this.label_title_Click);
             // 
             // textbox_content
             // 
