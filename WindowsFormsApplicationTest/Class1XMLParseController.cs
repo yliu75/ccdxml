@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Controls;
+using System.Collections.Generic;
 
 namespace WindowsFormsApplicationTest {
     public partial class Form1 {
@@ -40,6 +41,7 @@ namespace WindowsFormsApplicationTest {
         System.Windows.Forms.Label SelectedLabel = new System.Windows.Forms.Label();
         TreeNode firstNode, statsNode;
         TreeNode currentSelectedNode;
+        List<string> history = new List<string>();
 
         ///cut the head{urn:hl7-org:v3} of the XElement.Name
         public static string cutHead(string s) {
@@ -233,7 +235,6 @@ namespace WindowsFormsApplicationTest {
                     stringPtr=i;
                     searchLogic(root,subStr);
                 }
-
             if(!spaceFlag)
                 searchLogic(root,tarStr);
             else
@@ -362,7 +363,13 @@ namespace WindowsFormsApplicationTest {
         //Solution: skip all the comments
         //end of bugs
         //----------------------------------------------------
-        //Asynchronizational optmised for UI and loading 
+        //Asynchronizational optmised for UI and loading
         //Hiding treeview can accelerate the UI speed
+        //Notes:
+        //0.Asynchronization is difficult.
+        //1.Billions of requirements.
+        //2.Most of them are helpful yet.
+        //3.Implemented few of them.
+        //4.I am feeling good at present.
     }
 }

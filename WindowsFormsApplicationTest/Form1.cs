@@ -42,48 +42,84 @@ namespace WindowsFormsApplicationTest {
             //endif selected node is null
             checkBTxt();
         }
-        private void textbox_search_TextChanged(object sender,EventArgs e) {
+        private void resetSearch() {
             colorRestore(firstNode);
             itmsFd=0;
             cPtr=0;
             currentTarStr=null;
             this.label_itemFound.Text=" ";
+        }
+        private void textbox_search_TextChanged(object sender,EventArgs e) {
+            resetSearch();
             currentTarStr=textbox_search.Text.ToString().Split(' ');
             if(currentTarStr.Length>6) {
                 textbox_search.ReadOnly=true;
                 label_itemFound.Text="You can search atmost 6 items at once.";
             }
         }
+        private void updateHistory() {
+            int index = history.Count;
+            history0ToolStripMenuItem.Text=(history[--index]+"..");
+            if(index-->0) history1ToolStripMenuItem.Text=(history[index]+"..");
+            if(index-->0) history2ToolStripMenuItem.Text=(history[index]+"..");
+            if(index-->0) history3ToolStripMenuItem.Text=(history[index]+"..");
+            if(index-->0) history4ToolStripMenuItem.Text=(history[index]+"..");
+            if(index-->0) history5ToolStripMenuItem.Text=(history[index]+"..");
 
+        }
         private void textbox_search_EnterClicked(object sender,KeyEventArgs e) {
-            if(e.KeyData==Keys.Enter) {
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Reset();
-                stopwatch.Start();
-                if(textbox_search.Text.Equals(searchText,StringComparison.OrdinalIgnoreCase)) return;
-                searchText=textbox_search.Text;
-                showP();
-                foreach(TreeNode tn in treeView1.Nodes)
-                    advSearch(tn,searchText);
-                hideP();
-                stopwatch.Stop();
-                this.label_itemFound.Text=itmsFd.ToString()+(itmsFd>1 ? " items found in " : " item found in ")+stopwatch.ElapsedMilliseconds.ToString()+"ms.";
+            if(listBox_history.Items.Count!=0) listBox_history.Show();
+            this.Update();
+            switch(e.KeyData) {
+                case Keys.Enter:
+                resetSearch();
+                listBox_history.Hide();
+                this.Update();
+                //if(textbox_search.Text.Equals(searchText,StringComparison.OrdinalIgnoreCase)) return;
+                generalSearch();
 
-            } else if(e.KeyData==Keys.Back) {
+                break;
+                case Keys.Back:
                 textbox_search.ReadOnly=false;
                 label_itemFound.Text="";
+                break;
+                case Keys.Down:
+                listBox_history.Show();
+                this.Update();
+                break;
+                default:
+                break;
+
             }
             checkBTxt();
         }
-        private void button1_Click(object sender,EventArgs e) {
-            //bug fixed :)
-            if(textbox_search.Text.Equals(searchText,StringComparison.OrdinalIgnoreCase)) return;
+
+        //this is a extracted logic for the general search
+        //===================================================
+        private void generalSearch() {
+            history.Add(textbox_search.Text);
+            //listBox_history.Items.Add(textbox_search.Text);
+            listBox_history.Items.Insert(0,textbox_search.Text);
+            updateHistory();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Reset();
+            stopwatch.Start();
             searchText=textbox_search.Text;
+            currentTarStr=searchText.Split(' ');
+
             showP();
             foreach(TreeNode tn in treeView1.Nodes)
                 advSearch(tn,searchText);
             hideP();
-            this.label_itemFound.Text=itmsFd.ToString()+(itmsFd>1 ? " items found" : " item found");
+            stopwatch.Stop();
+            this.label_itemFound.Text=itmsFd.ToString()+(itmsFd>1 ? " items found in " : " item found in ")+stopwatch.ElapsedMilliseconds.ToString()+"ms.";
+        }
+        //===================================================
+        private void button1_Click(object sender,EventArgs e) {
+            //bug fixed :)
+            //if(textbox_search.Text.Equals(searchText,StringComparison.OrdinalIgnoreCase)) return;
+            resetSearch();
+            generalSearch();
         }
 
         private void button_expandAll_Click(object sender,EventArgs e) {
@@ -114,15 +150,15 @@ namespace WindowsFormsApplicationTest {
         private async void openToolStripMenuItem_Click(object sender,EventArgs e) {
             this.openFileDialog1.ShowDialog();
             Stream fileStream;
-            if((fileStream=openFileDialog1.OpenFile())!=null) {
-                showP();
-                try {
+            showP();
+            try {
+                if((fileStream=openFileDialog1.OpenFile())!=null)
                     await setup(fileStream);
-                } catch(Exception ex) { cutHead(ex.ToString()); }
-                hideP();
-                this.textbox_search.ReadOnly=false;
-            }
+            } catch(Exception ex) { cutHead(ex.ToString()); }
+            hideP();
+            this.textbox_search.ReadOnly=false;
         }
+
 
         private void expendAllNodesToolStripMenuItem_Click(object sender,EventArgs e) {
             if(firstNode!=null)
@@ -155,6 +191,53 @@ namespace WindowsFormsApplicationTest {
         }
 
         private void label_title_Click(object sender,EventArgs e) {
+
+        }
+
+        private void historyToolStripMenuItem_Click(object sender,EventArgs e) {
+
+        }
+
+        private void aboutAthenaToolStripMenuItem_Click(object sender,EventArgs e) {
+
+        }
+        private void historySearch(int i) {
+            resetSearch();
+            searchText=history[history.Count-i];
+            textbox_search.Text=history[history.Count-i];
+            generalSearch();
+        }
+        private void history0ToolStripMenuItem_Click(object sender,EventArgs e) {
+            historySearch(1);
+        }
+
+        private void history1ToolStripMenuItem_Click(object sender,EventArgs e) {
+            historySearch(2);
+        }
+
+        private void history2ToolStripMenuItem_Click(object sender,EventArgs e) {
+            historySearch(3);
+        }
+
+        private void history3ToolStripMenuItem_Click(object sender,EventArgs e) {
+            historySearch(4);
+        }
+
+        private void history4ToolStripMenuItem_Click(object sender,EventArgs e) {
+            historySearch(5);
+        }
+
+        private void history5ToolStripMenuItem_Click(object sender,EventArgs e) {
+            historySearch(6);
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender,EventArgs e) {
+            textbox_search.Text=listBox_history.SelectedItem.ToString();
+            listBox_history.Hide();
+
+        }
+
+        private void Form1_Load(object sender,EventArgs e) {
 
         }
     }
