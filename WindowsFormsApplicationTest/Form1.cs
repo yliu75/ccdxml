@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace WindowsFormsApplicationTest {
     public partial class Form1:Form {
@@ -56,13 +57,17 @@ namespace WindowsFormsApplicationTest {
 
         private void textbox_search_EnterClicked(object sender,KeyEventArgs e) {
             if(e.KeyData==Keys.Enter) {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Reset();
+                stopwatch.Start();
                 if(textbox_search.Text.Equals(searchText,StringComparison.OrdinalIgnoreCase)) return;
                 searchText=textbox_search.Text;
                 showP();
                 foreach(TreeNode tn in treeView1.Nodes)
                     advSearch(tn,searchText);
                 hideP();
-                this.label_itemFound.Text=itmsFd.ToString()+(itmsFd>1 ? " items found" : " item found");
+                stopwatch.Stop();
+                this.label_itemFound.Text=itmsFd.ToString()+(itmsFd>1 ? " items found in " : " item found in ")+stopwatch.ElapsedMilliseconds.ToString()+"ms.";
 
             } else if(e.KeyData==Keys.Back) {
                 textbox_search.ReadOnly=false;
@@ -109,14 +114,14 @@ namespace WindowsFormsApplicationTest {
         private async void openToolStripMenuItem_Click(object sender,EventArgs e) {
             this.openFileDialog1.ShowDialog();
             Stream fileStream;
-            try {
-                if((fileStream=openFileDialog1.OpenFile())!=null) {
-                    showP();
+            if((fileStream=openFileDialog1.OpenFile())!=null) {
+                showP();
+                try {
                     await setup(fileStream);
-                    hideP();
-                    this.textbox_search.ReadOnly=false;
-                }
-            } catch(Exception ex) { cutHead(ex.ToString()); }
+                } catch(Exception ex) { cutHead(ex.ToString()); }
+                hideP();
+                this.textbox_search.ReadOnly=false;
+            }
         }
 
         private void expendAllNodesToolStripMenuItem_Click(object sender,EventArgs e) {

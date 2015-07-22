@@ -36,9 +36,9 @@ namespace WindowsFormsApplicationTest {
         };//color array
         String[] currentTarStr = null;
         int xmlIndex = 0;
-        static int totalNodes = 0,maxDepth=0;
+        static int totalNodes = 0, maxDepth = 0;
         System.Windows.Forms.Label SelectedLabel = new System.Windows.Forms.Label();
-        TreeNode firstNode;
+        TreeNode firstNode, statsNode;
         TreeNode currentSelectedNode;
 
         ///cut the head{urn:hl7-org:v3} of the XElement.Name
@@ -57,27 +57,44 @@ namespace WindowsFormsApplicationTest {
             treeView1.Nodes.Insert(0,tn);
         }
         public async Task setup(Stream filePath) {
-            StreamReader sr = new StreamReader(filePath,true);
-            XDocument xdoc=null;
-            await Task.Run(() => {
-                xdoc = XDocument.Load(sr);
-            });
-            //XDocument xdoc = new XDocument();
-            //firstNode=this.treeView1.Nodes.Add();
-            firstNode=new TreeNode("CCDXml"+"_"+xmlIndex++);
-            XNode xEle = xdoc.FirstNode;
-            while(xEle.GetType().IsEquivalentTo(typeof(XComment))) xEle=xEle.NextNode;
-            
-            await Task.Run(async () => {
-                await addTn(firstNode,(XElement)xEle,maxDepth);
-                //treeView1.Nodes.Insert(0,firstNode); <--this will cause infinitly pending...
-                //tnInsertion(firstNode);
-            });
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Reset();
+            stopwatch.Start();
+
+            using(StreamReader sr = new StreamReader(filePath,true)) {
+                XDocument xdoc = null;
+                await Task.Run(() => {
+                    xdoc=XDocument.Load(sr);
+                });
+
+                //XDocument xdoc = new XDocument();
+                //firstNode=this.treeView1.Nodes.Add();
+                firstNode=new TreeNode("Xml_"+xmlIndex++);
+                XNode xEle = xdoc.FirstNode;
+                while(xEle.GetType().IsEquivalentTo(typeof(XComment))) xEle=xEle.NextNode;
+
+                await Task.Run(async () => {
+                    await addTn(firstNode,(XElement)xEle,maxDepth);
+                    //treeView1.Nodes.Insert(0,firstNode); <--this will cause infinitly pending...
+                    //tnInsertion(firstNode);
+                });
+            }
             //VirtualizingStackPanel.SetIsVirtualizing(treeView1,true);
+            statsNode=new TreeNode("Info_"+(xmlIndex-1).ToString());
+            string ts = totalNodes.ToString()+" nodes loaded.\nMaximum depth is "+maxDepth.ToString()+".";
+            firstNode.Tag=new XElement("info",ts);
+
             treeView1.Nodes.Insert(0,firstNode);
+            stopwatch.Stop();
+
+            label_itemFound.Text=totalNodes.ToString()+" nodes loaded in "+stopwatch.ElapsedMilliseconds.ToString()+"ms";
+            //treeView1.Nodes.Insert(0,statsNode);
+            totalNodes=0;
+            maxDepth=0;
             //((XElement)firstNode.Tag)="Total "+totalNodes+" nodes loaded.\nMaximum depth is "+maxDepth;
+            this.Update();
         }
-        
+
 
 
         //function that add nodes to treeviews form the xml file
@@ -94,11 +111,11 @@ namespace WindowsFormsApplicationTest {
                 treeN.Tag=ele;
                 totalNodes++;
                 foreach(XElement node in ele.Elements())
-                   await addTn(treeN,node,depth+1);
+                    await addTn(treeN,node,depth+1);
             } catch(Exception e) {
                 Console.WriteLine(e.Message);
             }
-        //});
+            //});
 
         }
         //expendnode and all its parent,grandparent, grandgrandparents,etc..
@@ -293,21 +310,21 @@ namespace WindowsFormsApplicationTest {
         [Conditional("SEARCH_ON")]
         public void highlight() {
             try {
-            int colorPtr = (currentTarStr.Length-1)*3;
-            foreach(string str in currentTarStr) {
-                int aRes = searchTxt(this.richTextBox1.Text,str);
-                int cRes = searchTxt(this.textbox_content.Text,str);
-                if(aRes!=-1) {
-                    richTextBox1.Select(aRes,str.Length);
-                    richTextBox1.SelectionBackColor=Color.FromArgb(cLst[colorPtr],cLst[colorPtr+1],cLst[colorPtr+2]);
+                int colorPtr = (currentTarStr.Length-1)*3;
+                foreach(string str in currentTarStr) {
+                    int aRes = searchTxt(this.richTextBox1.Text,str);
+                    int cRes = searchTxt(this.textbox_content.Text,str);
+                    if(aRes!=-1) {
+                        richTextBox1.Select(aRes,str.Length);
+                        richTextBox1.SelectionBackColor=Color.FromArgb(cLst[colorPtr],cLst[colorPtr+1],cLst[colorPtr+2]);
+                    }
+                    if(cRes!=-1) {
+                        textbox_content.Select(cRes,str.Length);
+                        textbox_content.SelectionBackColor=Color.FromArgb(cLst[colorPtr],cLst[colorPtr+1],cLst[colorPtr+2]);
+                    }
+                    colorPtr-=3;
                 }
-                if(cRes!=-1) {
-                    textbox_content.Select(cRes,str.Length);
-                    textbox_content.SelectionBackColor=Color.FromArgb(cLst[colorPtr],cLst[colorPtr+1],cLst[colorPtr+2]);
-                }
-                colorPtr-=3;
-            }
-             } catch(Exception ex) { ex.ToString(); }
+            } catch(Exception ex) { ex.ToString(); }
         }
 
         //end of definition
