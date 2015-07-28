@@ -18,6 +18,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Controls;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace WindowsFormsApplicationTest {
     public partial class Form1 {
@@ -36,7 +38,7 @@ namespace WindowsFormsApplicationTest {
                         201,201,201
         };//color array
         String[] currentTarStr = null;
-        int xmlIndex = 0;
+        int treeIndex = 0;
         static int totalNodes = 0, maxDepth = 0;
         System.Windows.Forms.Label SelectedLabel = new System.Windows.Forms.Label();
         TreeNode firstNode, statsNode;
@@ -58,31 +60,50 @@ namespace WindowsFormsApplicationTest {
             }
             treeView1.Nodes.Insert(0,tn);
         }
-        public async Task setup(Stream filePath) {
+        public static string getExtention(string filePath) {
+            if(filePath!=null) {
+                string[] temp = filePath.Split('.');
+                return temp[temp.Length-1];
+            }
+            return null;
+        }
+        public async Task setup(Stream filePath,string filePathStr) {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Reset();
             stopwatch.Start();
-
+            //if the loaded file is an xml file
             using(StreamReader sr = new StreamReader(filePath,true)) {
-                XDocument xdoc = null;
-                await Task.Run(() => {
-                    xdoc=XDocument.Load(sr);
-                });
+                string extn =getExtention( filePathStr);
+                if(extn.Equals("xml",StringComparison.OrdinalIgnoreCase)) {
+                    XDocument xdoc = null;
+                    await Task.Run(() => {
+                        xdoc=XDocument.Load(sr);
+                    });
 
-                //XDocument xdoc = new XDocument();
-                //firstNode=this.treeView1.Nodes.Add();
-                firstNode=new TreeNode("Xml_"+xmlIndex++);
-                XNode xEle = xdoc.FirstNode;
-                while(xEle.GetType().IsEquivalentTo(typeof(XComment))) xEle=xEle.NextNode;
+                    //XDocument xdoc = new XDocument();
+                    //firstNode=this.treeView1.Nodes.Add();
+                    firstNode=new TreeNode("Xml_"+treeIndex++);
+                    XNode xEle = xdoc.FirstNode;
+                    while(xEle.GetType().IsEquivalentTo(typeof(XComment))) xEle=xEle.NextNode;
 
-                await Task.Run(async () => {
-                    await addTn(firstNode,(XElement)xEle,maxDepth);
-                    //treeView1.Nodes.Insert(0,firstNode); <--this will cause infinitly pending...
-                    //tnInsertion(firstNode);
-                });
+                    await Task.Run(async () => {
+                        await addTn(firstNode,(XElement)xEle,maxDepth);
+                        //treeView1.Nodes.Insert(0,firstNode); <--this will cause infinitly pending...
+                        //tnInsertion(firstNode);
+                    });
+                    //if the loaded file is a json file
+                } else if(extn.Equals("json",StringComparison.OrdinalIgnoreCase)) {
+                    using(StreamReader reader = new StreamReader(filePath,true)) {
+                        await Task.Run(() => {
+                            JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
+                        });
+                        firstNode=new TreeNode("Json_"+treeIndex++);
+
+                    }
+                }
             }
             //VirtualizingStackPanel.SetIsVirtualizing(treeView1,true);
-            statsNode=new TreeNode("Info_"+(xmlIndex-1).ToString());
+            statsNode=new TreeNode("Info_"+(treeIndex-1).ToString());
             string ts = totalNodes.ToString()+" nodes loaded.\nMaximum depth is "+maxDepth.ToString()+".";
             firstNode.Tag=new XElement("info",ts);
 
@@ -325,7 +346,7 @@ namespace WindowsFormsApplicationTest {
                     }
                     colorPtr-=3;
                 }
-            } catch(Exception ex) { ex.ToString(); }
+            } catch(Exception ex) { Console.WriteLine(ex.Message); }
         }
 
         //end of definition

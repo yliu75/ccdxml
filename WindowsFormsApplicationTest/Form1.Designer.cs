@@ -46,15 +46,6 @@ namespace WindowsFormsApplicationTest {
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expendAllNodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutAthenaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.label_copyright = new System.Windows.Forms.Label();
             this.historyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.history0ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.history1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,6 +53,14 @@ namespace WindowsFormsApplicationTest {
             this.history3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.history4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.history5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutAthenaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label_copyright = new System.Windows.Forms.Label();
             this.listBox_history = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -71,10 +70,10 @@ namespace WindowsFormsApplicationTest {
             // treeView1
             // 
             this.treeView1.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treeView1.Location = new System.Drawing.Point(16, 151);
-            this.treeView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.treeView1.Location = new System.Drawing.Point(16, 99);
+            this.treeView1.Margin = new System.Windows.Forms.Padding(4);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(427, 601);
+            this.treeView1.Size = new System.Drawing.Size(427, 520);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
@@ -99,9 +98,9 @@ namespace WindowsFormsApplicationTest {
             this.textbox_content.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textbox_content.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textbox_content.Location = new System.Drawing.Point(8, 32);
-            this.textbox_content.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_content.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_content.Name = "textbox_content";
-            this.textbox_content.Size = new System.Drawing.Size(751, 371);
+            this.textbox_content.Size = new System.Drawing.Size(668, 276);
             this.textbox_content.TabIndex = 7;
             this.textbox_content.Text = "";
             // 
@@ -109,8 +108,8 @@ namespace WindowsFormsApplicationTest {
             // 
             this.textbox_search.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textbox_search.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textbox_search.Location = new System.Drawing.Point(16, 119);
-            this.textbox_search.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_search.Location = new System.Drawing.Point(13, 64);
+            this.textbox_search.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_search.Name = "textbox_search";
             this.textbox_search.ReadOnly = true;
             this.textbox_search.ShortcutsEnabled = false;
@@ -123,8 +122,8 @@ namespace WindowsFormsApplicationTest {
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(343, 119);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(343, 64);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 27);
             this.button1.TabIndex = 9;
@@ -136,8 +135,8 @@ namespace WindowsFormsApplicationTest {
             // 
             this.button_expandAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_expandAll.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_expandAll.Location = new System.Drawing.Point(216, 760);
-            this.button_expandAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_expandAll.Location = new System.Drawing.Point(216, 627);
+            this.button_expandAll.Margin = new System.Windows.Forms.Padding(4);
             this.button_expandAll.Name = "button_expandAll";
             this.button_expandAll.Size = new System.Drawing.Size(227, 44);
             this.button_expandAll.TabIndex = 10;
@@ -149,8 +148,8 @@ namespace WindowsFormsApplicationTest {
             // 
             this.button_expand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_expand.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_expand.Location = new System.Drawing.Point(16, 760);
-            this.button_expand.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_expand.Location = new System.Drawing.Point(16, 627);
+            this.button_expand.Margin = new System.Windows.Forms.Padding(4);
             this.button_expand.Name = "button_expand";
             this.button_expand.Size = new System.Drawing.Size(192, 44);
             this.button_expand.TabIndex = 11;
@@ -164,7 +163,7 @@ namespace WindowsFormsApplicationTest {
             this.label_itemFound.BackColor = System.Drawing.Color.White;
             this.label_itemFound.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_itemFound.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label_itemFound.Location = new System.Drawing.Point(16, 89);
+            this.label_itemFound.Location = new System.Drawing.Point(17, 43);
             this.label_itemFound.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_itemFound.Name = "label_itemFound";
             this.label_itemFound.Size = new System.Drawing.Size(12, 17);
@@ -177,7 +176,7 @@ namespace WindowsFormsApplicationTest {
             this.label_pending.BackColor = System.Drawing.Color.Transparent;
             this.label_pending.Font = new System.Drawing.Font("Microsoft YaHei", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_pending.ForeColor = System.Drawing.Color.Black;
-            this.label_pending.Location = new System.Drawing.Point(125, 443);
+            this.label_pending.Location = new System.Drawing.Point(151, 309);
             this.label_pending.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_pending.Name = "label_pending";
             this.label_pending.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -197,7 +196,7 @@ namespace WindowsFormsApplicationTest {
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1299, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(1206, 27);
             this.menuStrip1.TabIndex = 16;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -231,6 +230,62 @@ namespace WindowsFormsApplicationTest {
             this.expendAllNodesToolStripMenuItem.Text = "Expend All Nodes";
             this.expendAllNodesToolStripMenuItem.Click += new System.EventHandler(this.expendAllNodesToolStripMenuItem_Click);
             // 
+            // historyToolStripMenuItem
+            // 
+            this.historyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.history0ToolStripMenuItem,
+            this.history1ToolStripMenuItem,
+            this.history2ToolStripMenuItem,
+            this.history3ToolStripMenuItem,
+            this.history4ToolStripMenuItem,
+            this.history5ToolStripMenuItem});
+            this.historyToolStripMenuItem.Name = "historyToolStripMenuItem";
+            this.historyToolStripMenuItem.Size = new System.Drawing.Size(61, 21);
+            this.historyToolStripMenuItem.Text = "History";
+            this.historyToolStripMenuItem.Click += new System.EventHandler(this.historyToolStripMenuItem_Click);
+            // 
+            // history0ToolStripMenuItem
+            // 
+            this.history0ToolStripMenuItem.Name = "history0ToolStripMenuItem";
+            this.history0ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.history0ToolStripMenuItem.Text = "History0";
+            this.history0ToolStripMenuItem.Click += new System.EventHandler(this.history0ToolStripMenuItem_Click);
+            // 
+            // history1ToolStripMenuItem
+            // 
+            this.history1ToolStripMenuItem.Name = "history1ToolStripMenuItem";
+            this.history1ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.history1ToolStripMenuItem.Text = "History1";
+            this.history1ToolStripMenuItem.Click += new System.EventHandler(this.history1ToolStripMenuItem_Click);
+            // 
+            // history2ToolStripMenuItem
+            // 
+            this.history2ToolStripMenuItem.Name = "history2ToolStripMenuItem";
+            this.history2ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.history2ToolStripMenuItem.Text = "History2";
+            this.history2ToolStripMenuItem.Click += new System.EventHandler(this.history2ToolStripMenuItem_Click);
+            // 
+            // history3ToolStripMenuItem
+            // 
+            this.history3ToolStripMenuItem.Name = "history3ToolStripMenuItem";
+            this.history3ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.history3ToolStripMenuItem.Text = "History3";
+            this.history3ToolStripMenuItem.Click += new System.EventHandler(this.history3ToolStripMenuItem_Click);
+            // 
+            // history4ToolStripMenuItem
+            // 
+            this.history4ToolStripMenuItem.Name = "history4ToolStripMenuItem";
+            this.history4ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.history4ToolStripMenuItem.Text = "History4";
+            this.history4ToolStripMenuItem.Click += new System.EventHandler(this.history4ToolStripMenuItem_Click);
+            // 
+            // history5ToolStripMenuItem
+            // 
+            this.history5ToolStripMenuItem.Name = "history5ToolStripMenuItem";
+            this.history5ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.history5ToolStripMenuItem.Text = "History5";
+            this.history5ToolStripMenuItem.Click += new System.EventHandler(this.history5ToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -263,10 +318,10 @@ namespace WindowsFormsApplicationTest {
             this.groupBox1.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.groupBox1.Location = new System.Drawing.Point(511, 136);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(767, 211);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(684, 211);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Attributes";
@@ -275,44 +330,31 @@ namespace WindowsFormsApplicationTest {
             // 
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Location = new System.Drawing.Point(8, 32);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(751, 167);
+            this.richTextBox1.Size = new System.Drawing.Size(668, 167);
             this.richTextBox1.TabIndex = 19;
             this.richTextBox1.Text = "";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.webBrowser1);
             this.groupBox2.Controls.Add(this.textbox_content);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.groupBox2.Location = new System.Drawing.Point(511, 355);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Size = new System.Drawing.Size(767, 411);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(684, 316);
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Content";
-            // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Location = new System.Drawing.Point(8, 32);
-            this.webBrowser1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(27, 27);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.ScrollBarsEnabled = false;
-            this.webBrowser1.Size = new System.Drawing.Size(751, 371);
-            this.webBrowser1.TabIndex = 8;
-            this.webBrowser1.Visible = false;
-            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
             // label_copyright
             // 
             this.label_copyright.AutoSize = true;
             this.label_copyright.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label_copyright.Location = new System.Drawing.Point(892, 805);
+            this.label_copyright.Location = new System.Drawing.Point(803, 675);
             this.label_copyright.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_copyright.Name = "label_copyright";
             this.label_copyright.Size = new System.Drawing.Size(392, 16);
@@ -320,69 +362,13 @@ namespace WindowsFormsApplicationTest {
             this.label_copyright.Text = "Copyright 2015 © By Ames It and Numeric Solution";
             this.label_copyright.Click += new System.EventHandler(this.label1_Click);
             // 
-            // historyToolStripMenuItem
-            // 
-            this.historyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.history0ToolStripMenuItem,
-            this.history1ToolStripMenuItem,
-            this.history2ToolStripMenuItem,
-            this.history3ToolStripMenuItem,
-            this.history4ToolStripMenuItem,
-            this.history5ToolStripMenuItem});
-            this.historyToolStripMenuItem.Name = "historyToolStripMenuItem";
-            this.historyToolStripMenuItem.Size = new System.Drawing.Size(61, 21);
-            this.historyToolStripMenuItem.Text = "History";
-            this.historyToolStripMenuItem.Click += new System.EventHandler(this.historyToolStripMenuItem_Click);
-            // 
-            // history0ToolStripMenuItem
-            // 
-            this.history0ToolStripMenuItem.Name = "history0ToolStripMenuItem";
-            this.history0ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.history0ToolStripMenuItem.Text = "History0";
-            this.history0ToolStripMenuItem.Click += new System.EventHandler(this.history0ToolStripMenuItem_Click);
-            // 
-            // history1ToolStripMenuItem
-            // 
-            this.history1ToolStripMenuItem.Name = "history1ToolStripMenuItem";
-            this.history1ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.history1ToolStripMenuItem.Text = "History1";
-            this.history1ToolStripMenuItem.Click += new System.EventHandler(this.history1ToolStripMenuItem_Click);
-            // 
-            // history2ToolStripMenuItem
-            // 
-            this.history2ToolStripMenuItem.Name = "history2ToolStripMenuItem";
-            this.history2ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.history2ToolStripMenuItem.Text = "History2";
-            this.history2ToolStripMenuItem.Click += new System.EventHandler(this.history2ToolStripMenuItem_Click);
-            // 
-            // history3ToolStripMenuItem
-            // 
-            this.history3ToolStripMenuItem.Name = "history3ToolStripMenuItem";
-            this.history3ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.history3ToolStripMenuItem.Text = "History3";
-            this.history3ToolStripMenuItem.Click += new System.EventHandler(this.history3ToolStripMenuItem_Click);
-            // 
-            // history4ToolStripMenuItem
-            // 
-            this.history4ToolStripMenuItem.Name = "history4ToolStripMenuItem";
-            this.history4ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.history4ToolStripMenuItem.Text = "History4";
-            this.history4ToolStripMenuItem.Click += new System.EventHandler(this.history4ToolStripMenuItem_Click);
-            // 
-            // history5ToolStripMenuItem
-            // 
-            this.history5ToolStripMenuItem.Name = "history5ToolStripMenuItem";
-            this.history5ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.history5ToolStripMenuItem.Text = "History5";
-            this.history5ToolStripMenuItem.Click += new System.EventHandler(this.history5ToolStripMenuItem_Click);
-            // 
             // listBox_history
             // 
             this.listBox_history.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F);
             this.listBox_history.FormattingEnabled = true;
             this.listBox_history.ItemHeight = 20;
-            this.listBox_history.Location = new System.Drawing.Point(20, 143);
-            this.listBox_history.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBox_history.Location = new System.Drawing.Point(16, 87);
+            this.listBox_history.Margin = new System.Windows.Forms.Padding(4);
             this.listBox_history.Name = "listBox_history";
             this.listBox_history.Size = new System.Drawing.Size(309, 124);
             this.listBox_history.TabIndex = 20;
@@ -394,7 +380,7 @@ namespace WindowsFormsApplicationTest {
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1299, 833);
+            this.ClientSize = new System.Drawing.Size(1206, 694);
             this.Controls.Add(this.listBox_history);
             this.Controls.Add(this.label_copyright);
             this.Controls.Add(this.groupBox2);
@@ -410,7 +396,7 @@ namespace WindowsFormsApplicationTest {
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("SimSun", 12F);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "XMLExplorer(v1.0.1.0Beta)";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -447,7 +433,6 @@ namespace WindowsFormsApplicationTest {
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private RichTextBox richTextBox1;
-        private WebBrowser webBrowser1;
         private Label label_copyright;
         private ToolStripMenuItem historyToolStripMenuItem;
         private ToolStripMenuItem history0ToolStripMenuItem;

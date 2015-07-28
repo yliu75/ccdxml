@@ -77,7 +77,6 @@ namespace WindowsFormsApplicationTest {
                 this.Update();
                 //if(textbox_search.Text.Equals(searchText,StringComparison.OrdinalIgnoreCase)) return;
                 generalSearch();
-
                 break;
                 case Keys.Back:
                 textbox_search.ReadOnly=false;
@@ -89,7 +88,6 @@ namespace WindowsFormsApplicationTest {
                 break;
                 default:
                 break;
-
             }
             checkBTxt();
         }
@@ -153,7 +151,8 @@ namespace WindowsFormsApplicationTest {
             showP();
             try {
                 if((fileStream=openFileDialog1.OpenFile())!=null)
-                    await setup(fileStream);
+                    
+                    await setup(fileStream,openFileDialog1.FileName);
             } catch(Exception ex) { cutHead(ex.ToString()); }
             hideP();
             this.textbox_search.ReadOnly=false;
