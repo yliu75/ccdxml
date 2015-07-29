@@ -20,6 +20,7 @@ using System.Windows.Controls;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using XMLExplorer;
 
 namespace WindowsFormsApplicationTest {
     public partial class Form1 {
@@ -70,11 +71,12 @@ namespace WindowsFormsApplicationTest {
         public async Task setup(Stream filePath,string filePathStr) {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Reset();
-            stopwatch.Start();
+
             //if the loaded file is an xml file
             using(StreamReader sr = new StreamReader(filePath,true)) {
-                string extn =getExtention( filePathStr);
+                string extn = getExtention(filePathStr);
                 if(extn.Equals("xml",StringComparison.OrdinalIgnoreCase)) {
+                    stopwatch.Start();
                     XDocument xdoc = null;
                     await Task.Run(() => {
                         xdoc=XDocument.Load(sr);
@@ -82,38 +84,62 @@ namespace WindowsFormsApplicationTest {
 
                     //XDocument xdoc = new XDocument();
                     //firstNode=this.treeView1.Nodes.Add();
-                    firstNode=new TreeNode("Xml_"+treeIndex++);
                     XNode xEle = xdoc.FirstNode;
+                    firstNode=new TreeNode("Xml_"+treeIndex++);
+                    XMLTreeNode xn = new XMLTreeNode(0,0,firstNode);
                     while(xEle.GetType().IsEquivalentTo(typeof(XComment))) xEle=xEle.NextNode;
 
                     await Task.Run(async () => {
-                        await addTn(firstNode,(XElement)xEle,maxDepth);
-                        //treeView1.Nodes.Insert(0,firstNode); <--this will cause infinitly pending...
-                        //tnInsertion(firstNode);
+                        await xn.addTn(firstNode,(XElement)xEle,maxDepth);
                     });
+                    statsNode=new TreeNode("Info_"+(treeIndex-1).ToString());
+                    string ts = xn.totalNodes.ToString()+" nodes loaded.\nMaximum depth is "+xn.maxDepth.ToString()+".";
+                    xn.root.Tag=new XElement("info",ts);
+
+                    treeView1.Nodes.Insert(0,xn.root);
+                    stopwatch.Stop();
+
+                    label_itemFound.Text=xn.totalNodes.ToString()
+                                        +" nodes loaded in "
+                                        +stopwatch.ElapsedMilliseconds.ToString()
+                                        +"ms";
+                    xn.totalNodes=0;
+                    xn.maxDepth=0;
+
+
+
                     //if the loaded file is a json file
                 } else if(extn.Equals("json",StringComparison.OrdinalIgnoreCase)) {
-                    using(StreamReader reader = new StreamReader(filePath,true)) {
-                        await Task.Run(() => {
-                            JObject o = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
-                        });
-                        firstNode=new TreeNode("Json_"+treeIndex++);
-    
-                    }
+                    stopwatch.Start();
+                    JObject o=null;
+                    await Task.Run(() => {
+                        o = (JObject)JToken.ReadFrom(new JsonTextReader(sr));
+                    });
+                    firstNode=new TreeNode("Json_"+treeIndex++);
+                    JSONTreeNode jn = new JSONTreeNode(0,0,firstNode);
+
+                    //while(xEle.GetType().IsEquivalentTo(typeof(XComment))) xEle=xEle.NextNode;
+
+                    await Task.Run(async () => {
+                        await jn.addTn(firstNode,o,maxDepth);
+                    });
+                    statsNode=new TreeNode("Info_"+(treeIndex-1).ToString());
+                    string ts = jn.totalNodes.ToString()+" nodes loaded.\nMaximum depth is "+jn.maxDepth.ToString()+".";
+                    jn.root.Tag=new XElement("info",ts);
+
+                    treeView1.Nodes.Insert(0,jn.root);
+                    stopwatch.Stop();
+
+                    label_itemFound.Text=jn.totalNodes.ToString()
+                                        +" nodes loaded in "
+                                        +stopwatch.ElapsedMilliseconds.ToString()
+                                        +"ms";
+                    jn.totalNodes=0;
+                    jn.maxDepth=0;
                 }
             }
             //VirtualizingStackPanel.SetIsVirtualizing(treeView1,true);
-            statsNode=new TreeNode("Info_"+(treeIndex-1).ToString());
-            string ts = totalNodes.ToString()+" nodes loaded.\nMaximum depth is "+maxDepth.ToString()+".";
-            firstNode.Tag=new XElement("info",ts);
-
-            treeView1.Nodes.Insert(0,firstNode);
-            stopwatch.Stop();
-
-            label_itemFound.Text=totalNodes.ToString()+" nodes loaded in "+stopwatch.ElapsedMilliseconds.ToString()+"ms";
-            //treeView1.Nodes.Insert(0,statsNode);
-            totalNodes=0;
-            maxDepth=0;
+            
             //((XElement)firstNode.Tag)="Total "+totalNodes+" nodes loaded.\nMaximum depth is "+maxDepth;
             this.Update();
         }

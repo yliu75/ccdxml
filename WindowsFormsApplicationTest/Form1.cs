@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Newtonsoft.Json.Linq;
 
 namespace WindowsFormsApplicationTest {
     public partial class Form1:Form {
@@ -31,10 +32,19 @@ namespace WindowsFormsApplicationTest {
             else {
                 this.label_title.Text=cutHead(e.Node.Text);
                 if(e.Node.Tag!=null) {
-                    this.textbox_content.Text=((XElement)e.Node.Tag).Value;
-                    setBold(e);
-                    highlight();
-
+                    try {
+                        this.textbox_content.Text=((XElement)e.Node.Tag).Value;
+                        setBold(e);
+                        highlight();
+                    } catch {
+                        try {
+                            foreach(var text in (((JObject)e.Node.Tag).Children()))
+                                textbox_content.Text+=(text.ToString()+"\n");
+                            highlight();
+                        } catch(Exception ex) {
+                            Console.Write(ex.Message);
+                        }
+                    }
                 } else this.richTextBox1.Text=" ";
 
             }
