@@ -65,6 +65,7 @@ namespace WindowsFormsApplicationTest {
 
             using(StreamReader sr = new StreamReader(filePath,true)) {
                 XDocument xdoc = null;
+                
                 await Task.Run(() => {
                     xdoc=XDocument.Load(sr);
                 });
