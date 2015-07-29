@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Controls;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace WindowsFormsApplicationTest {
     public partial class Form1 {
@@ -58,22 +59,37 @@ namespace WindowsFormsApplicationTest {
             }
             treeView1.Nodes.Insert(0,tn);
         }
-        public async Task setup(Stream filePath) {
+        public static string getExtention(string filename) {
+            return filename.Split('.')[filename.Split('.').Length-1];
+        }
+        public async Task setup(Stream filePath,string fileName) {
+            string ext = getExtention(fileName);
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Reset();
             stopwatch.Start();
+            using(StreamReader sr = new StreamReader(filePath)) {
 
-            using(StreamReader sr = new StreamReader(filePath,true)) {
                 XDocument xdoc = null;
-                
-                await Task.Run(() => {
-                    xdoc=XDocument.Load(sr);
-                });
+                XNode xEle = null;
+                string s = sr.ReadToEnd();
+                //s=s.Replace('\n',' ');
+
+                if(fileName.EndsWith(".json")) {
+                    //json
+                    xEle=JsonConvert.DeserializeXNode(s,"root").FirstNode;
+                } else {
+                    //xml
+                    await Task.Run(() => {
+                        xdoc=XDocument.Load(s);
+                    });
+                    firstNode=new TreeNode("XML_Tree_"+xmlIndex++);
+                    xEle=xdoc.FirstNode;
+                }
 
                 //XDocument xdoc = new XDocument();
                 //firstNode=this.treeView1.Nodes.Add();
-                firstNode=new TreeNode("Xml_"+xmlIndex++);
-                XNode xEle = xdoc.FirstNode;
+                //firstNode=new TreeNode("Xml_"+xmlIndex++);
+                //XNode xEle = xdoc.FirstNode;
                 while(xEle.GetType().IsEquivalentTo(typeof(XComment))) xEle=xEle.NextNode;
 
                 await Task.Run(async () => {

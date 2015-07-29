@@ -153,7 +153,7 @@ namespace WindowsFormsApplicationTest {
             showP();
             try {
                 if((fileStream=openFileDialog1.OpenFile())!=null)
-                    await setup(fileStream);
+                    await setup(fileStream,openFileDialog1.FileName);
             } catch(Exception ex) { cutHead(ex.ToString()); }
             hideP();
             this.textbox_search.ReadOnly=false;
