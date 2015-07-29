@@ -67,20 +67,21 @@ namespace WindowsFormsApplicationTest {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Reset();
             stopwatch.Start();
-            using(StreamReader sr = new StreamReader(filePath)) {
+            using(StreamReader sr = new StreamReader(filePath,true)) {
 
                 XDocument xdoc = null;
                 XNode xEle = null;
-                string s = sr.ReadToEnd();
                 //s=s.Replace('\n',' ');
 
                 if(fileName.EndsWith(".json")) {
                     //json
+                    string s = sr.ReadToEnd();
                     xEle=JsonConvert.DeserializeXNode(s,"root").FirstNode;
+                    firstNode=new TreeNode("Json_Tree_"+xmlIndex++);
                 } else {
                     //xml
                     await Task.Run(() => {
-                        xdoc=XDocument.Load(s);
+                        xdoc=XDocument.Load(sr);
                     });
                     firstNode=new TreeNode("XML_Tree_"+xmlIndex++);
                     xEle=xdoc.FirstNode;
