@@ -19,6 +19,7 @@ using System.IO;
 using System.Windows.Controls;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using XMLExplorer;
 
 namespace WindowsFormsApplicationTest {
     public partial class Form1 {
@@ -36,13 +37,16 @@ namespace WindowsFormsApplicationTest {
                         201,201,201,
                         201,201,201
         };//color array
-        String[] currentTarStr = null;
+        string[] currentTarStr = null;
+        static List<string> nodeList = new List<string>();
         int xmlIndex = 0;
+        static int smartGuessNum = 0;
         static int totalNodes = 0, maxDepth = 0;
         System.Windows.Forms.Label SelectedLabel = new System.Windows.Forms.Label();
         TreeNode firstNode, statsNode;
         TreeNode currentSelectedNode;
         List<string> history = new List<string>();
+
 
         ///cut the head{urn:hl7-org:v3} of the XElement.Name
         public static string cutHead(string s) {
@@ -62,8 +66,10 @@ namespace WindowsFormsApplicationTest {
         public static string getExtention(string filename) {
             return filename.Split('.')[filename.Split('.').Length-1];
         }
-        public async Task setup(Stream filePath,string fileName) {
+
+        public async Task loadFile(Stream filePath,string fileName) {
             string ext = getExtention(fileName);
+            listBox_histAndSmt.Items.Add("----------------------------------");
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Reset();
             stopwatch.Start();
@@ -119,7 +125,6 @@ namespace WindowsFormsApplicationTest {
 
         //function that add nodes to treeviews form the xml file
         public async static Task addTn(TreeNode parentNode,XElement ele,int depth) {
-            //await Task.Run(async() => {//delete this to boost the loading speed to x10
             if(depth>maxDepth) maxDepth=depth;
             try {
                 if(parentNode==null||ele==null||ele.Name==null||ele.Name.ToString()==null)
@@ -127,7 +132,9 @@ namespace WindowsFormsApplicationTest {
                 string nodeName = cutHead(ele.Name.ToString());
                 if(nodeName==null)
                     return;
-                var treeN = parentNode.Nodes.Add(cutHead(ele.Name.ToString()));
+                string eleName = cutHead(ele.Name.ToString());
+                var treeN = parentNode.Nodes.Add(eleName);
+                if(!nodeList.Contains(eleName)) { nodeList.Add(eleName); }
                 treeN.Tag=ele;
                 totalNodes++;
                 foreach(XElement node in ele.Elements())
@@ -135,8 +142,6 @@ namespace WindowsFormsApplicationTest {
             } catch(Exception e) {
                 Console.WriteLine(e.Message);
             }
-            //});
-
         }
         //expendnode and all its parent,grandparent, grandgrandparents,etc..
         public static void expendNode(TreeNode child) {
@@ -226,7 +231,7 @@ namespace WindowsFormsApplicationTest {
                 if(firstNode.IsExpanded) button_expandAll.Text="Collapse All Node";
                 else button_expandAll.Text="Expand All Node";
             //check if the textbox need a scroll bar
-            if(this.textbox_content.Text.Length>=500)
+            if(this.textbox_content.Text.Length>=400)
                 this.textbox_content.ScrollBars=RichTextBoxScrollBars.Vertical;
             else this.textbox_content.ScrollBars=RichTextBoxScrollBars.None;
         }
@@ -279,13 +284,13 @@ namespace WindowsFormsApplicationTest {
         }
         //show pending label and hide pending label
         public void showP() {
-            this.label_pending.Show();
-            this.treeView1.Visible=false;
-            this.Update();
+            label_pending.Show();
+            treeView1.Visible=false;
+            Update();
         }
         public void hideP() {
-            this.label_pending.Hide();
-            this.treeView1.Visible=true;
+            label_pending.Hide();
+            treeView1.Visible=true;
         }
         //-----------------------------------------
 
@@ -308,7 +313,7 @@ namespace WindowsFormsApplicationTest {
             if(nodeXElem.HasAttributes) {
                 //attributes of a node into stirng format
                 string nAttr = attrToStr(nodeXElem);
-                this.richTextBox1.Text=nAttr;
+                richTextBox1.Text=nAttr;
                 int start = 0, left = 0, right = 0, len = nAttr.Length;
 
                 //find all the data and set them to bold
@@ -345,6 +350,23 @@ namespace WindowsFormsApplicationTest {
                 }
             } catch(Exception ex) { ex.ToString(); }
         }
+        public void smartGuess(string target) {
+            while(smartGuessNum-->0) listBox_histAndSmt.Items.RemoveAt(listBox_histAndSmt.Items.Count-1);
+            smartGuessNum++;
+            foreach(string s in nodeList) {
+                int[] next = new int[s.Length];
+                if(s.StartsWith(target)) {
+                    listBox_histAndSmt.Items.Add(s);
+                    int h = listBox_histAndSmt.GetItemHeight(0);
+                    int c = (listBox_histAndSmt.Items.Count+1);
+                    if(c>10) listBox_histAndSmt.Height=10*h;
+                    else listBox_histAndSmt.Height=h*c;
+                    smartGuessNum++;
+                    //Update();
+                }
+            }
+            Update();
+        }
 
         //end of definition
         //==========================================================================================
@@ -379,6 +401,9 @@ namespace WindowsFormsApplicationTest {
         //Bug 7
         //Problem: errors occur when the xml file starts with XComments element
         //Solution: skip all the comments
+        //Bug 8
+        //Problem: func was skipped
+        //Solution: make sure the #define was add properly.ie:#define SEARCH_ON [conditional("SEARCH_ON")]
         //end of bugs
         //----------------------------------------------------
         //Asynchronizational optmised for UI and loading
