@@ -20,6 +20,7 @@ using System.Windows.Controls;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using XMLExplorer;
+using System.Net;
 
 namespace WindowsFormsApplicationTest {
     public partial class Form1 {
@@ -40,20 +41,28 @@ namespace WindowsFormsApplicationTest {
         string[] currentTarStr = null;
         static List<string> nodeList = new List<string>();
         int xmlIndex = 0;
+        static int fileTypeID = fileType.local;//1=xml,2=json
+        protected struct fileType {
+            public const int local = 0;
+            public const int xml = 1;
+            public const int json = 2;
+        }
         static int smartGuessNum = 0;
         static int totalNodes = 0, maxDepth = 0;
         static int DEFAULT_SMART_GUESS_ROWS = 10;
         static int formWidth;
         static int formHeight;
+        static string url=null;
         System.Windows.Forms.Label SelectedLabel = new System.Windows.Forms.Label();
         TreeNode firstNode, statsNode;
         TreeNode currentSelectedNode;
         List<string> history = new List<string>();
-
+        XNode xEle = null;
+        Form2 testDialog;
 
 
         ///cut the head{urn:hl7-org:v3} of the XElement.Name
-        public static string cutHead(string s) {
+        protected static string cutHead(string s) {
             //string result;
             //if(s==null||getHead(s)==0) return s;
             string[] res = s.Split('}');
@@ -67,36 +76,54 @@ namespace WindowsFormsApplicationTest {
             }
             treeView1.Nodes.Insert(0,tn);
         }
-        public static string getExtention(string filename) {
+        protected static string getExtention(string filename) {
             return filename.Split('.')[filename.Split('.').Length-1];
         }
+        private async static Task <Stream> GetStreamFromUrl(string url) {
+            byte[] apiWebData = null;
 
-        public async Task loadFile(Stream filePath,string fileName) {
-            string ext = getExtention(fileName);
+            using(var wc = new WebClient())
+                await Task.Run(()=> {
+                    apiWebData=wc.DownloadData(url);
+                });
+
+            return new MemoryStream(apiWebData);
+        }
+        protected async Task filePathToNode(Stream filePath,string fileName) {
+            //if(fileTypeID!=fileType.local) {
+            //    Stream s = await GetStreamFromUrl(url);
+            //} else
+                using(StreamReader sr = new StreamReader(filePath,true)) {
+                    XDocument xdoc = null;
+                    //s=s.Replace('\n',' ');
+
+                    if(fileName.EndsWith(".json",StringComparison.OrdinalIgnoreCase)||fileTypeID==2) {
+                        //json
+                        string s = sr.ReadToEnd();
+                        xEle=JsonConvert.DeserializeXNode(s,"root").FirstNode;
+                        firstNode=new TreeNode("Json_Tree_"+xmlIndex++);
+                    } else if(fileName.EndsWith(".xml",StringComparison.OrdinalIgnoreCase)||fileTypeID==1) {
+                        //xml
+                        await Task.Run(() => {
+                            xdoc=XDocument.Load(sr);
+                        });
+                        firstNode=new TreeNode("XML_Tree_"+xmlIndex++);
+                        xEle=xdoc.FirstNode;
+                    }
+                }
+            
+        }
+        protected async Task filePathToNode() {
+            Stream sr = await GetStreamFromUrl(url);
+            string s = new StreamReader(sr,true).ReadToEnd();
+            xEle=JsonConvert.DeserializeXNode(s,"root").FirstNode;
+            firstNode=new TreeNode("Json_Tree_"+xmlIndex++);
+        }
+        public async Task loadFile() {
             ///textbox_search.;
-            listBox_histAndSmt.Items.Add("----------------------------------");
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Reset();
             stopwatch.Start();
-            using(StreamReader sr = new StreamReader(filePath,true)) {
-
-                XDocument xdoc = null;
-                XNode xEle = null;
-                //s=s.Replace('\n',' ');
-
-                if(fileName.EndsWith(".json")) {
-                    //json
-                    string s = sr.ReadToEnd();
-                    xEle=JsonConvert.DeserializeXNode(s,"root").FirstNode;
-                    firstNode=new TreeNode("Json_Tree_"+xmlIndex++);
-                } else {
-                    //xml
-                    await Task.Run(() => {
-                        xdoc=XDocument.Load(sr);
-                    });
-                    firstNode=new TreeNode("XML_Tree_"+xmlIndex++);
-                    xEle=xdoc.FirstNode;
-                }
 
                 //XDocument xdoc = new XDocument();
                 //firstNode=this.treeView1.Nodes.Add();
@@ -109,7 +136,7 @@ namespace WindowsFormsApplicationTest {
                     //treeView1.Nodes.Insert(0,firstNode); <--this will cause infinitly pending...
                     //tnInsertion(firstNode);
                 });
-            }
+            
             //VirtualizingStackPanel.SetIsVirtualizing(treeView1,true);
             statsNode=new TreeNode("Info_"+(xmlIndex-1).ToString());
             string ts = totalNodes.ToString()+" nodes loaded.\nMaximum depth is "+maxDepth.ToString()+".";
