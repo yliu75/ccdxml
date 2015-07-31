@@ -43,6 +43,8 @@ namespace WindowsFormsApplicationTest {
         static int smartGuessNum = 0;
         static int totalNodes = 0, maxDepth = 0;
         static int DEFAULT_SMART_GUESS_ROWS = 10;
+        static int formWidth;
+        static int formHeight;
         System.Windows.Forms.Label SelectedLabel = new System.Windows.Forms.Label();
         TreeNode firstNode, statsNode;
         TreeNode currentSelectedNode;
@@ -71,6 +73,7 @@ namespace WindowsFormsApplicationTest {
 
         public async Task loadFile(Stream filePath,string fileName) {
             string ext = getExtention(fileName);
+            ///textbox_search.;
             listBox_histAndSmt.Items.Add("----------------------------------");
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Reset();
