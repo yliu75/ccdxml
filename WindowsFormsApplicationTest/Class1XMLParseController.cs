@@ -42,10 +42,12 @@ namespace WindowsFormsApplicationTest {
         int xmlIndex = 0;
         static int smartGuessNum = 0;
         static int totalNodes = 0, maxDepth = 0;
+        static int DEFAULT_SMART_GUESS_ROWS = 10;
         System.Windows.Forms.Label SelectedLabel = new System.Windows.Forms.Label();
         TreeNode firstNode, statsNode;
         TreeNode currentSelectedNode;
         List<string> history = new List<string>();
+
 
 
         ///cut the head{urn:hl7-org:v3} of the XElement.Name
@@ -350,20 +352,21 @@ namespace WindowsFormsApplicationTest {
                 }
             } catch(Exception ex) { ex.ToString(); }
         }
-        public void smartGuess(string target) {
+        public void smartGuess(string target,int n) {
             while(smartGuessNum-->0) listBox_histAndSmt.Items.RemoveAt(listBox_histAndSmt.Items.Count-1);
             smartGuessNum++;
             foreach(string s in nodeList) {
-                int[] next = new int[s.Length];
-                if(s.StartsWith(target)) {
-                    listBox_histAndSmt.Items.Add(s);
-                    int h = listBox_histAndSmt.GetItemHeight(0);
-                    int c = (listBox_histAndSmt.Items.Count+1);
-                    if(c>10) listBox_histAndSmt.Height=10*h;
-                    else listBox_histAndSmt.Height=h*c;
-                    smartGuessNum++;
-                    //Update();
-                }
+                if(listBox_histAndSmt.Items.Count<n) {
+                    int[] next = new int[s.Length];
+                    if(s.StartsWith(target,StringComparison.OrdinalIgnoreCase)) {
+                        listBox_histAndSmt.Items.Add(s);
+                        int h = listBox_histAndSmt.GetItemHeight(0);
+                        int c = (listBox_histAndSmt.Items.Count+1);
+                        //if(c>n) listBox_histAndSmt.Height=n*h;
+                        listBox_histAndSmt.Height=h*c;
+                        smartGuessNum++;
+                        //Update();
+                    } }
             }
             Update();
         }
